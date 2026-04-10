@@ -26,21 +26,42 @@
 <body>
     <div class="container">
             <h1>BRM Radio - Manada Flow</h1>
-             <div class="player-section">
-                    <h2 style="text-align: center; margin-bottom: 20px;">🎧 Reproductor Live</h2>
-                    <audio id="audio-player" controls crossorigin="anonymous" preload="metadata">
-                        <source src="https://bubatronik.radiostream321.com/" type="audio/mpeg">
-                        Tu navegador no soporta audio HTML5.
-                        <iframe src="https://bubatronik.radiostream321.com/" width="300" height="100"></iframe>
-                    </audio>
-                   <audio controls autoplay src="https://bubatronik.radiostream321.com/"></audio>
-                    <p>Stream: Bubatronik live | Fallback: <a href="https://bubatronik.radiostream321.com/">Directo</a></p>
-                    <div id="status" class="status">🔴 Desconectado - Transmitiendo cuando activo</div>
-              </div>
-        
+             <audio id="player" controls preload="metadata">
+                <source src="https://bubatronik.radiostream123.com/" type="audio/mpeg">
+              </audio>
+              <p id="status">Conectado</p>
+              <button onclick="toggle()">Play/Pausa</button>
               <script>
-                const audio = document.querySelector('audio');
-                audio.onerror = () => alert('Stream down? Check URL.');
+                const player = document.getElementById('player');
+                const status = document.getElementById('status');
+                let reconnectInterval;
+            
+                player.addEventListener('loadstart', () => status.textContent = 'Cargando...');
+                player.addEventListener('playing', () => status.textContent = '🎵 Live - Conectado');
+                player.addEventListener('pause', () => status.textContent = 'Pausado');
+                player.addEventListener('error', () => {
+                  status.textContent = '❌ Error - Reintentando...';
+                  reconnect();
+                });
+                player.addEventListener('ended', reconnect); // Streams loop
+            
+                function reconnect() {
+                  clearInterval(reconnectInterval);
+                  reconnectInterval = setInterval(() => {
+                    if (player.paused || player.ended || player.error) {
+                      player.load();
+                      player.play().catch(e => console.log('Mobile user gesture needed'));
+                    } else clearInterval(reconnectInterval);
+                  }, 5000); // 5s check
+                }
+            
+                function toggle() {
+                  if (player.paused) player.play();
+                  else player.pause();
+                }
+            
+                // Mobile: play on user touch
+                document.addEventListener('touchstart', () => player.play().catch(() => {}), {once: true});
               </script>
         
             <div class="card">
