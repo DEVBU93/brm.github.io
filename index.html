@@ -26,8 +26,16 @@
 <body>
     <div class="container">
             <h1>BRM Radio - Manada Flow</h1>
-              <audio controls autoplay src="https://bubatronik.radiostream123.com/"></audio>
-              <p>Stream: Bubatronik live | Fallback: <a href="https://bubatronik.radiostream123.com/">Directo</a></p>
+             <div class="player-section">
+                    <h2 style="text-align: center; margin-bottom: 20px;">🎧 Reproductor Live</h2>
+                    <audio id="audio-player" controls crossorigin="anonymous" preload="metadata">
+                        <source src="https://bubatronik.radiostream123.com/" type="audio/mpeg">
+                        Tu navegador no soporta audio HTML5.
+                        <iframe src="https://bubatronik.radiostream123.com/" width="300" height="100"></iframe>
+                    </audio>
+                    <p>Stream: Bubatronik live | Fallback: <a href="https://bubatronik.radiostream123.com/">Directo</a></p>
+                    <div id="status" class="status">🔴 Desconectado - Transmitiendo cuando activo</div>
+              </div>
               <script>
                 const audio = document.querySelector('audio');
                 audio.onerror = () => alert('Stream down? Check URL.');
