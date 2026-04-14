@@ -997,9 +997,10 @@
         // BUILD ARTWORK CAROUSEL
         const wrap=document.getElementById('artworkWrap');
         const dots=document.getElementById('artDots');
+        IMG_IDS.forEach((id,i)=>{
         const isVideo = VIDEO_IDS.has(id);
         const slide=document.createElement('div');
-        IMG_IDS.forEach((id,i)=>{
+
           slide.className='artwork-slide'+(i===0?' active':'');
           slide.innerHTML=`
             <img
@@ -1057,8 +1058,9 @@
           }
         
         if(frame) frame.src = VIDEO_IDS.has(IMG_IDS[curSlide]) ? drivePreview(IMG_IDS[curSlide]) : '';
-        setInterval(()=>goSlide((curSlide+1)%IMG_IDS.length),6000);
         }
+            setInterval(()=>goSlide((curSlide+1)%IMG_IDS.length),6000);
+        
         // MINI GRID
         const mg=document.getElementById('miniGrid');
         IMG_IDS.forEach((id,i)=>{
