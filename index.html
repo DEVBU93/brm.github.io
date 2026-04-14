@@ -1034,16 +1034,7 @@
           dot.addEventListener('click',()=>goSlide(i));
           dots.appendChild(dot);
         });
-        IMG_IDS.forEach((id,i)=>{
-          const slide=document.createElement('div');
-          slide.className='artwork-slide'+(i===0?' active':'');
-          slide.innerHTML=`<img src="${thumb(id,800)}" alt="BUBATRONIK_BRM Art ${i+1}" loading="${i===0?'eager':'lazy'}">`;
-          wrap.insertBefore(slide,wrap.querySelector('.artwork-overlay'));
-          const dot=document.createElement('button');
-          if(i===0)dot.className='active';
-          dot.addEventListener('click',()=>goSlide(i));
-          dots.appendChild(dot);
-        });
+
          
         // VIDEO THUMB
         document.getElementById('videoThumb').src=thumb(IMG_IDS[0],600);
@@ -1080,12 +1071,14 @@
         // MINI GRID
         const mg=document.getElementById('miniGrid');
         IMG_IDS.forEach((id,i)=>{
-          const img=document.createElement('img');
-          img.src=thumb(id,200);
-          img.alt=`Art ${i+1}`;
-          img.loading='lazy';
-          img.addEventListener('click',()=>goSlide(i));
-          mg.appendChild(img);
+          const slide=document.createElement('div');
+          slide.className='artwork-slide'+(i===0?' active':'');
+          slide.innerHTML=`<img src="${thumb(id,800)}" alt="BUBATRONIK_BRM Art ${i+1}" loading="${i===0?'eager':'lazy'}">`;
+          wrap.insertBefore(slide,wrap.querySelector('.artwork-overlay'));
+          const dot=document.createElement('button');
+          if(i===0)dot.className='active';
+          dot.addEventListener('click',()=>goSlide(i));
+          dots.appendChild(dot);
         });
          
         // WAVEFORM
