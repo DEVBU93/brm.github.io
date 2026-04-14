@@ -735,8 +735,9 @@
                       <div class="now-playing-num" id="npNum"># · BUBATRONIK_BRM RADIO</div>
                     </div>
                     <div class="artwork-dots" id="artDots"></div>
-              </div>
                     <iframe id="videoFrame" src=""width="640"height="360"allow="autoplay"allowfullscreen></iframe>
+              </div>
+
               <!-- WAVEFORM -->
               <div class="waveform-section">
                 <div class="waveform" id="waveform"></div>
@@ -999,14 +1000,6 @@
         IMG_IDS.forEach((id,i)=>{
           const slide=document.createElement('div');
           slide.className='artwork-slide'+(i===0?' active':'');
-          slide.innerHTML=`<img src="${thumb(id,800)}" alt="BUBATRONIK_BRM Art ${i+1}" loading="${i===0?'eager':'lazy'}">`;
-          wrap.insertBefore(slide,wrap.querySelector('.artwork-overlay'));
-          const dot=document.createElement('button');
-          if(i===0)dot.className='active';
-          dot.addEventListener('click',()=>goSlide(i));
-          dots.appendChild(dot);
-          const isVideo = VIDEO_IDS.has(id);
-        
           slide.innerHTML=`
             <img
               src="${thumb(id,800)}"
@@ -1015,7 +1008,12 @@
               data-id="${id}"
               data-video="${isVideo ? '1' : '0'}"
             >`;
-        
+          wrap.insertBefore(slide,wrap.querySelector('.artwork-overlay'));
+          const dot=document.createElement('button');
+          if(i===0)dot.className='active';
+          dot.addEventListener('click',()=>goSlide(i));
+          dots.appendChild(dot);
+          const isVideo = VIDEO_IDS.has(id);
           const imgEl = slide.querySelector('img');
           if (isVideo) {
             imgEl.style.cursor = 'pointer';
@@ -1025,8 +1023,6 @@
               frame.src = drivePreview(id);
             });
           }
-        
-          wrap.insertBefore(slide,wrap.querySelector('.artwork-overlay'));
         });
 
          
