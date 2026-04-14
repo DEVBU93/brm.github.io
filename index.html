@@ -1027,37 +1027,19 @@
         function goSlide(n){
           const slides = document.querySelectorAll('.artwork-slide');
           const dotBtns = document.querySelectorAll('#artDots button');
-        
           slides[curSlide].classList.remove('active');
           dotBtns[curSlide].classList.remove('active');
-        
           curSlide=n;
-        
           slides[curSlide].classList.add('active');
           dotBtns[curSlide].classList.add('active');
-        
           // Sync now-playing
           const t=TRACKS[Math.floor(Math.random()*TRACKS.length)];
           document.getElementById('npTitle').textContent=t.t;
           document.getElementById('npNum').textContent=`#${t.n} · BUBATRONIK_BRM RADIO`;
           document.getElementById('videoThumb').src=thumb(IMG_IDS[curSlide],600);
-        
           // NUEVO: si el slide actual es vídeo, cargarlo en el iframe
-          const id = IMG_IDS[curSlide];
-          if (VIDEO_IDS.has(id)) {
-            const frame = document.getElementById('videoFrame');
-            if (frame) {
-              frame.src = drivePreview(id);
-            }
-          } else {
-            // opcional: parar vídeo cuando no es slide de vídeo
-            const frame = document.getElementById('videoFrame');
-            if (frame) {
-              frame.src = '';
-            }
-          }
-        
-        if(frame) frame.src = VIDEO_IDS.has(IMG_IDS[curSlide]) ? drivePreview(IMG_IDS[curSlide]) : '';
+          const frame=document.getElementById('videoFrame');
+          if(frame) frame.src=VIDEO_IDS.has(IMG_IDS[curSlide])?drivePreview(IMG_IDS[curSlide]):'';
         }
             setInterval(()=>goSlide((curSlide+1)%IMG_IDS.length),6000);
         
