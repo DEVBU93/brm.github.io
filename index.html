@@ -1017,10 +1017,6 @@
           dots.appendChild(dot);
         });
 
-         
-        // VIDEO THUMB
-        document.getElementById('videoThumb').src=thumb(IMG_IDS[0],600);
-         
         let curSlide=0;
         function goSlide(n){
           document.querySelectorAll('.artwork-slide')[curSlide].classList.remove('active');
@@ -1033,7 +1029,8 @@
           document.getElementById('npTitle').textContent=t.t;
           document.getElementById('npNum').textContent=`#${t.n} · BUBATRONIK_BRM RADIO`;
           document.getElementById('videoThumb').src=thumb(IMG_IDS[curSlide],600);
-           
+        // VIDEO THUMB
+          document.getElementById('videoThumb').src=thumb(IMG_IDS[0],600);
           if (isVideo) {
           imgEl.style.cursor = 'pointer';
           imgEl.addEventListener('click', ()=>{
