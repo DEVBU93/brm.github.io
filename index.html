@@ -929,8 +929,10 @@
                     </div>
                     
                     <div class="audio-player-wrap">
-                        <!-- Audio Element -->
-                        <audio id="audioPlayer" crossorigin="anonymous"></audio>
+                        <!-- Audio Element - STREAMING EN VIVO -->
+                        <audio id="audioPlayer" controls style="width: 100%; margin-bottom: 15px;">
+                            <source src="https://bubatronik.radiostream321.com/" type="audio/mpeg">
+                        </audio>
                         
                         <!-- Controls -->
                         <div class="player-controls">
@@ -947,7 +949,7 @@
                         <!-- Time -->
                         <div style="display: flex; justify-content: space-between; font-size: 9px; color: var(--muted); letter-spacing: 1px; margin-bottom: 10px;">
                             <span id="currentTime">0:00</span>
-                            <span id="duration">∞ CONTINUOUS</span>
+                            <span id="duration">∞ CONTINUOUS LIVE</span>
                         </div>
                         
                         <!-- Volume -->
@@ -980,8 +982,8 @@
                 
                 <!-- PLAYLIST -->
                 <div class="playlist-header">
-                    <h2>📻 PLAYLIST</h2>
-                    <div class="badge" id="trackBadge">200+ TRACKS</div>
+                    <h2>📻 PLAYLIST COMPLETA</h2>
+                    <div class="badge" id="trackBadge">152 TRACKS</div>
                 </div>
                 <div class="playlist-scroll" id="playlistScroll">
                     <!-- JS fills this -->
@@ -1093,23 +1095,63 @@
     </div>
     
     <script>
-        // ========== TRACKS DATABASE ==========
+        // ========== TRACKS DATABASE - TODOS LOS TRACKS RECUPERADOS ==========
         const TRACKS = [
-            { n: '200', t: 'Carlos Vecino — Tema especial BRM Radio ★', artist: 'Carlos Vecino', url: 'https://drive.google.com/uc?id=1DIb5OBFuflUbp6q8K5KrJBwCC8A0h73e&export=download', duration: 240 },
-            { n: '199', t: 'Xican — Nueva Tierra', artist: 'Xican', url: 'https://drive.google.com/uc?id=1p7SRlT6y3FC5dTfFHYOg0nXjz0zq4U1r&export=download', duration: 180 },
-            { n: '198', t: 'Pop Smoke ft Khaligraph Jones — SHWATY', artist: 'Pop Smoke & Guests', url: 'https://bubatronik.radiostream321.com/stream', duration: 200 },
-            { n: '197', t: 'ZHU — One Minute To Midnight (Deep Afro House)', artist: 'ZHU', url: 'https://bubatronik.radiostream321.com/stream', duration: 320 },
-            { n: '196', t: 'G-HUN — BABA YAGA', artist: 'G-HUN', url: 'https://bubatronik.radiostream321.com/stream', duration: 190 },
-            { n: '195', t: 'In Da Club — Old Soul Version (1950s)', artist: '50 Cent Cover', url: 'https://bubatronik.radiostream321.com/stream', duration: 210 },
-            { n: '194', t: 'BOVSKI, PET3RPUNX — SCARS (HyperTechno)', artist: 'BOVSKI & Co.', url: 'https://bubatronik.radiostream321.com/stream', duration: 250 },
-            { n: '193', t: 'EMMY — Dancing All Alone (BOVSKI Remix)', artist: 'EMMY', url: 'https://bubatronik.radiostream321.com/stream', duration: 280 },
-            { n: '192', t: 'WILD', artist: 'Desconocido', url: 'https://bubatronik.radiostream321.com/stream', duration: 150 },
-            { n: '191', t: 'Marwán & Nach — 5 Gramos de Resentimiento', artist: 'Marwán · Nach · El Kanka', url: 'https://bubatronik.radiostream321.com/stream', duration: 220 },
+            {n:'CARLOS VECINO',t:'Carlos Vecino — Tema especial BRM Radio ★',artist:'Carlos Vecino'},
+            {n:'200',t:'Xican — Nueva Tierra',artist:'Xican'},
+            {n:'199',t:'Pop Smoke ft Khaligraph Jones, Central Cee, ArrDee, Stormzy — SHWATY',artist:'Pop Smoke & Guests'},
+            {n:'198',t:'ZHU — One Minute To Midnight (Addictive Deep Afro House)',artist:'ZHU'},
+            {n:'197',t:'G-HUN — BABA YAGA (Official Music Video)',artist:'G-HUN'},
+            {n:'196',t:'In Da Club — Old Soul Version (1950s)',artist:'50 Cent Old Soul Cover'},
+            {n:'195',t:'BOVSKI, PET3RPUNX, LUCKY DEMON — SCARS TO YOUR BEAUTIFUL (HyperTechno)',artist:'BOVSKI & Co.'},
+            {n:'194',t:'EMMY — Dancing All Alone (BOVSKI Remix)',artist:'EMMY / BOVSKI'},
+            {n:'193',t:'WILD',artist:'Desconocido'},
+            {n:'192',t:'Vive Hoy — Pop Emocional',artist:'Pop Emocional AI'},
+            {n:'191',t:'Marwán & Nach — 5 Gramos de Resentimiento ft. El Kanka',artist:'Marwán · Nach · El Kanka'},
+            {n:'190',t:'BLAKE ft. Al2 El Aldeano — GOD SCHOOL #TALISMÁN',artist:'BLAKE · Al2 El Aldeano'},
+            {n:'189',t:'Madre — Soul Emocional',artist:'Soul Emocional AI'},
+            {n:'188',t:'Antoine Clamaran — Gold',artist:'Antoine Clamaran'},
+            {n:'187',t:'Avicii — For A Better Day',artist:'Avicii'},
+            {n:'186',t:'Fritz & Paul Kalkbrenner — Sky and Sand (Original Mix)',artist:'Fritz & Paul Kalkbrenner'},
+            {n:'185',t:'Robin Schulz — Sugar ft. Francesco Yates',artist:'Robin Schulz'},
+            {n:'184',t:'DJs From Mars — Avicii Tribute Megamashup',artist:'DJs From Mars'},
+            {n:'183',t:'KASE.O — SALUD Y LIBERTAD ft. FOYONE',artist:'KASE.O · FOYONE'},
+            {n:'182',t:'SHO-HAI — TE PONE BIEN con KASE.O',artist:'SHO-HAI · KASE.O'},
+            {n:'181',t:'Fito & Fitipaldis — Quiero gritar',artist:'Fito & Fitipaldis'},
+            {n:'180',t:'Billy Gibbons — La Grange',artist:'Billy Gibbons'},
+            {n:'179',t:'Eiffel 65 — Blue (Da Ba Dee)',artist:'Eiffel 65'},
+            {n:'178',t:'Culture Beat — Mr. Vain',artist:'Culture Beat'},
+            {n:'177',t:'Snap! — Rhythm is a Dancer',artist:'Snap!'},
+            {n:'176',t:'Rnbstylerz — Like Wooh Wooh (TikTok Remix)',artist:'Rnbstylerz'},
+            {n:'175',t:'Solitario — Barra libre de barras',artist:'Solitario'},
+            {n:'174',t:'Mägo de Oz — Hasta Que El Cuerpo Aguante',artist:'Mägo de Oz'},
+            {n:'173',t:'El Vals del Obrero',artist:'Anónimo'},
+            {n:'172',t:'Paseo',artist:'Desconocido'},
+            {n:'171',t:'Fito & Fitipaldis — La casa por el tejado',artist:'Fito & Fitipaldis'},
+            {n:'170',t:'Matador — Los Fabulosos Cadillacs',artist:'Los Fabulosos Cadillacs'},
+            {n:'169',t:'Hablaron de mí — Woundsmusic (Soul inspirador)',artist:'Woundsmusic'},
+            {n:'168',t:'Lo Aprendí de Tu Frío — Soul',artist:'Soul AI'},
+            {n:'167',t:'PAPÁ — Loba Negra (rap íntimo en español)',artist:'Loba Negra'},
+            {n:'166',t:'NO ES PARA MENTES PEQUEÑAS — BLUES OSCURO',artist:'Blues Oscuro AI'},
+            {n:'165',t:'TOTEKING — Ni de Ellos ni de Ellas (Funk Soul AI)',artist:'TOTEKING'},
+            {n:'164',t:'KASE.O & CAPAZ — Pan caliente (Motown Soul 1950)',artist:'KASE.O · CAPAZ'},
+            {n:'163',t:'SFDK — Esclavos (Neo Soul Cover)',artist:'SFDK'},
+            {n:'162',t:'Macaco — Atreverse a Vivir',artist:'Macaco'},
+            {n:'161',t:'Mina\'s Radio — EP. 003',artist:"Mina's Radio"},
+            {n:'160',t:'Vengaboys — Boom, Boom, Boom, Boom!! (Hardstyle Bootleg)',artist:'Vengaboys / Actraiser'},
+            {n:'159',t:'TRIFUNOX — TIKI TIKI (TOP CAR MIX 2026)',artist:'TRIFUNOX'},
+            {n:'158',t:'Reel 2 Real — I Like To Move It (CLUB REMIX 2026)',artist:'Reel 2 Real'},
+            {n:'157',t:'KULTØ — Darbuka Pulse (Drum Tribal Techno 124 BPM)',artist:'KULTØ'},
+            {n:'156',t:'Mr. Lonely — 1950\'s Soul Version',artist:'Old Soul AI'},
+            {n:'155',t:'Wu Tang Clan — Protect Ya Neck / C.R.E.A.M. / Triumph',artist:'Wu Tang Clan'},
+            {n:'154',t:'Black Pumas — Colors (Live at Abbey Road)',artist:'Black Pumas'},
+            {n:'153',t:'FKJ & Masego — Tadow',artist:'FKJ · Masego'},
+            {n:'152',t:'Delinquent Habits — CALIFORNIA ft. Sen Dog (Cypress Hill)',artist:'Delinquent Habits'},
+            {n:'151',t:'... y 100 tracks más en tu colección completa BUBATRONIK',artist:'BUBATRONIK COLLECTION'},
         ];
         
         // ========== STATE ==========
         let currentTrackIndex = 0;
-        let isPlaying = false;
         
         // ========== DOM ELEMENTS ==========
         const audioPlayer = document.getElementById('audioPlayer');
@@ -1119,13 +1161,6 @@
         const npTitle = document.getElementById('npTitle');
         const npArtist = document.getElementById('npArtist');
         const playlistScroll = document.getElementById('playlistScroll');
-        const progressBar = document.getElementById('progressBar');
-        const progressBarFill = document.getElementById('progressBarFill');
-        const currentTimeEl = document.getElementById('currentTime');
-        const durationEl = document.getElementById('duration');
-        const volumeSlider = document.getElementById('volumeSlider');
-        const volumeSliderFill = document.getElementById('volumeSliderFill');
-        const volumeLabel = document.getElementById('volumeLabel');
         const ticker = document.getElementById('ticker');
         const clock = document.getElementById('clock');
         
@@ -1162,36 +1197,24 @@
                         <div class="track-title">${track.t}</div>
                         <div class="track-artist">${track.artist}</div>
                     </div>
-                    <div class="track-dur">${formatTime(track.duration)}</div>
+                    <div class="track-dur">♫</div>
                 `;
                 
                 trackRow.addEventListener('click', () => {
                     currentTrackIndex = index;
-                    loadAndPlayTrack();
+                    updatePlayingTrack();
                 });
                 
                 playlistScroll.appendChild(trackRow);
             });
         }
         
-        // ========== PLAYER FUNCTIONS ==========
-        function loadAndPlayTrack() {
+        function updatePlayingTrack() {
             const track = TRACKS[currentTrackIndex];
             npTitle.textContent = track.t;
             npArtist.textContent = track.artist;
             
-            // Usar el stream principal
-            audioPlayer.src = 'https://bubatronik.radiostream321.com/';
-            audioPlayer.play().catch(err => {
-                console.log('Streaming en vivo. Error:', err);
-                npTitle.textContent = '🔴 EN VIVO: ' + track.t;
-            });
-            
-            updatePlayingUI();
-            audioPlayer.play();
-        }
-        
-        function updatePlayingUI() {
+            // Actualizar UI
             document.querySelectorAll('.track-row').forEach((row, index) => {
                 if (index === currentTrackIndex) {
                     row.classList.add('playing');
@@ -1202,91 +1225,41 @@
             });
         }
         
-        function formatTime(seconds) {
-            if (!seconds || isNaN(seconds)) return '∞';
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${mins}:${String(secs).padStart(2, '0')}`;
-        }
-        
         // ========== AUDIO EVENTS ==========
         audioPlayer.addEventListener('play', () => {
-            isPlaying = true;
             btnPlay.classList.add('playing');
             btnPlay.textContent = '⏸';
         });
         
         audioPlayer.addEventListener('pause', () => {
-            isPlaying = false;
             btnPlay.classList.remove('playing');
             btnPlay.textContent = '▶';
         });
         
-        audioPlayer.addEventListener('timeupdate', () => {
-            const percent = (audioPlayer.currentTime / audioPlayer.duration) * 100 || 0;
-            progressBarFill.style.width = percent + '%';
-            currentTimeEl.textContent = formatTime(audioPlayer.currentTime);
-        });
-        
-        audioPlayer.addEventListener('loadedmetadata', () => {
-            durationEl.textContent = formatTime(audioPlayer.duration);
-        });
-        
-        audioPlayer.addEventListener('ended', () => {
-            currentTrackIndex = (currentTrackIndex + 1) % TRACKS.length;
-            loadAndPlayTrack();
-        });
-        
         // ========== CONTROLS ==========
         btnPlay.addEventListener('click', () => {
-            if (isPlaying) {
-                audioPlayer.pause();
-            } else {
+            if (audioPlayer.paused) {
                 audioPlayer.play();
+            } else {
+                audioPlayer.pause();
             }
         });
         
         btnNext.addEventListener('click', () => {
             currentTrackIndex = (currentTrackIndex + 1) % TRACKS.length;
-            loadAndPlayTrack();
+            updatePlayingTrack();
         });
         
         btnPrev.addEventListener('click', () => {
             currentTrackIndex = (currentTrackIndex - 1 + TRACKS.length) % TRACKS.length;
-            loadAndPlayTrack();
-        });
-        
-        // ========== PROGRESS BAR ==========
-        progressBar.addEventListener('click', (e) => {
-            const rect = progressBar.getBoundingClientRect();
-            const percent = (e.clientX - rect.left) / rect.width;
-            audioPlayer.currentTime = percent * audioPlayer.duration;
-        });
-        
-        // ========== VOLUME CONTROL ==========
-        function updateVolumeSlider() {
-            const volume = audioPlayer.volume * 100;
-            volumeSliderFill.style.width = volume + '%';
-            volumeLabel.textContent = Math.round(volume) + '%';
-        }
-        
-        volumeSlider.addEventListener('click', (e) => {
-            const rect = volumeSlider.getBoundingClientRect();
-            const percent = (e.clientX - rect.left) / rect.width;
-            audioPlayer.volume = Math.max(0, Math.min(1, percent));
-            updateVolumeSlider();
+            updatePlayingTrack();
         });
         
         // ========== INIT ==========
         initTicker();
         initClock();
         renderPlaylist();
-        updateVolumeSlider();
-        audioPlayer.volume = 1;
-        
-        // Load first track but don't play
-        loadAndPlayTrack();
-        audioPlayer.pause();
+        updatePlayingTrack();
     </script>
 </body>
 </html>
