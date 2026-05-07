@@ -818,12 +818,7 @@
             <div class="player-card">
               <canvas id="vizCanvas"></canvas>
 
-              <audio id="audioPlayer" preload="none">
-                <source src="https://brm.rubenrodriguez-f-93.workers.dev/stream" type="audio/mpeg">
-                <source src="https://brm.rubenrodriguez-f-93.workers.dev/" type="audio/mpeg">
-                <source src="https://bubatronik.radiostream321.com/stream" type="audio/mpeg">
-                <source src="http://uk4freenew.listen2myradio.com:25771/" type="audio/mpeg">
-              </audio>
+              <audio id="audioPlayer" preload="none" crossorigin="anonymous"></audio>
 
               <div class="controls-row">
                 <button class="ctrl-btn" id="btnPrev" title="Anterior (A)">⏮</button>
@@ -1555,10 +1550,21 @@
   async function togglePlay() {
     if (!audioCtx) initAudioCtx();
     if (audioCtx && audioCtx.state === 'suspended') await audioCtx.resume();
-    if (isPlaying) { audio.pause(); }
-    else {
-      try { await audio.play(); }
-      catch(e) { toast('⚠️ Error de stream — abriendo player nativo...'); setTimeout(openNativePlayer, 1200); }
+    if (isPlaying) {
+      audio.pause();
+      audio.src = '';          // libera el stream completamente
+      streamAttempt = 0;
+    } else {
+      streamAttempt = 0;
+      audio.src = STREAM_URLS[0] + '?t=' + Date.now(); // cache-buster
+      audio.load();
+      try {
+        await audio.play();
+      } catch(e) {
+        console.warn('BRM togglePlay error:', e);
+        toast('⚠️ Error al conectar — probando siguiente stream...');
+        tryNextStream();
+      }
     }
   }
 
@@ -1571,16 +1577,36 @@
     isPlaying = false; btnPlay.textContent = '▶';
     btnPlay.classList.remove('is-playing'); document.body.classList.remove('is-playing-body');
   });
-  audio.addEventListener('error', () => {
+
+    function tryNextStream() {
     streamAttempt++;
     if (streamAttempt < STREAM_URLS.length) {
       toast(`🔄 Probando stream ${streamAttempt + 1}/${STREAM_URLS.length}...`);
-      audio.src = STREAM_URLS[streamAttempt]; audio.load(); audio.play().catch(()=>{});
+      audio.src = STREAM_URLS[streamAttempt] + '?t=' + Date.now();
+      audio.load();
+      audio.play().catch(() => tryNextStream());
     } else {
-      toast('⚠️ Stream offline — intentando player web nativo...');
-      setOffline(); setTimeout(openNativePlayer, 2000); streamAttempt = 0;
+      toast('⚠️ Stream offline — abriendo player nativo...');
+      setOffline();
+      setTimeout(openNativePlayer, 2000);
+      streamAttempt = 0;
     }
+  }
+  
+  audio.addEventListener('error', () => {
+    if (!isPlaying) tryNextStream();
   });
+    
+  //audio.addEventListener('error', () => {
+  //  streamAttempt++;
+  //  if (streamAttempt < STREAM_URLS.length) {
+  //    toast(`🔄 Probando stream ${streamAttempt + 1}/${STREAM_URLS.length}...`);
+  //    audio.src = STREAM_URLS[streamAttempt]; audio.load(); audio.play().catch(()=>{});
+  //  } else {
+  //    toast('⚠️ Stream offline — intentando player web nativo...');
+  //    setOffline(); setTimeout(openNativePlayer, 2000); streamAttempt = 0;
+  //  }
+  //});
 
   btnPlay.addEventListener('click', togglePlay);
   document.getElementById('btnPrev').addEventListener('click', () =>
