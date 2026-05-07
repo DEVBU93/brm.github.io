@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="es" data-status="checking">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="BUBATRONIK_BRM · Frecuencia Sant Salvador — Radio comunitaria y cultural desde Sant Salvador, Tarragona. Open Format 24/7. Vermut Dominical cada domingo a las 12h.">
+  <meta name="theme-color" content="#f59e0b">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="BRM RADIO">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="BUBATRONIK_BRM · Frecuencia Sant Salvador 🛰️">
+  <meta property="og:description" content="Radio comunitaria Open Format desde Sant Salvador, Tarragona — Vermut Dominical cada domingo 12h · 709+ tracks · ¡AUUUAUUU!">
+  <meta property="og:url" content="https://brm.worldmos.world">
+  <meta property="og:image" content="https://drive.google.com/uc?export=view&id=1SopFdy3rmWlxUunYdfvJz0kyrXDcO2jN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BUBATRONIK_BRM · Frecuencia Sant Salvador 🛰️">
+  <meta name="twitter:description" content="Radio comunitaria Open Format · Tarragona · Vermut Dominical 12h · ¡AUUUAUUU!">
+  <title>🔊 BUBATRONIK_BRM · FRECUENCIA SANT SALVADOR · LIVE 24/7</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@300;400;600;700&family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:       #05050a;
+      --bg2:      #0b0b14;
+      --bg3:      #12121e;
+      --bg4:      #1a1a2a;
+      --amber:    #f59e0b;
+      --amber2:   #fbbf24;
+      --amber3:   #fde68a;
+      --amber4:   #92610a;
+      --amber5:   rgba(245,158,11,0.07);
+      --red:      #ef4444;
+      --red2:     #b91c1c;
+      --green:    #10b981;
+      --cyan:     #06b6d4;
+      --white:    #f4f0eb;
+      --muted:    #7a7a8f;
+      --muted2:   #4a4a60;
+      --border:   #22223a;
+      --border2:  #2e2e4a;
+      --glow-a:   rgba(245,158,11,0.15);
+      --glow-r:   rgba(239,68,68,0.2);
+      --radius:   8px;
+      --fs-xs:    9px;
+      --fs-sm:    11px;
+      --fs-base:  13px;
+      --ticker-h: 38px;
+    }
+
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'JetBrains Mono', monospace;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999; opacity: 0.6;
+    }
+
+    .scanlines {
+      position: fixed; inset: 0;
+      background: repeating-linear-gradient(to bottom, transparent 0px, transparent 2px, rgba(0,0,0,0.07) 2px, rgba(0,0,0,0.07) 3px);
+      pointer-events: none; z-index: 9998; mix-blend-mode: overlay;
+    }
+
+    .bg-mesh {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 20%, rgba(245,158,11,0.04) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 90% 80%, rgba(245,158,11,0.03) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 50% 50%, rgba(6,182,212,0.02) 0%, transparent 70%);
+    }
+
+    /* TICKER */
+    .ticker-wrap {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 200; height: var(--ticker-h);
+      background: var(--amber);
+      display: flex; align-items: center; overflow: hidden;
+      box-shadow: 0 2px 20px rgba(245,158,11,0.4);
+    }
+    .ticker-badge {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 15px; letter-spacing: 2px; color: var(--bg);
+      padding: 0 18px; height: 100%; display: flex; align-items: center; gap: 8px;
+      white-space: nowrap; border-right: 2px solid rgba(0,0,0,0.15);
+      min-width: fit-content; flex-shrink: 0;
+    }
+    .ticker-live-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--red); animation: blink-dot 1.2s step-start infinite; flex-shrink: 0;
+    }
+    @keyframes blink-dot { 0%,49%{opacity:1} 50%,100%{opacity:0.2} }
+    .ticker-overflow { overflow: hidden; flex: 1; display: flex; }
+    .ticker-track {
+      display: flex; animation: ticker-scroll 220s linear infinite; white-space: nowrap;
+    }
+    .ticker-track:hover { animation-play-state: paused; }
+    .ticker-track span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px; color: var(--bg); padding: 0 36px; font-weight: 700; letter-spacing: 1.5px;
+    }
+    @keyframes ticker-scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    .page { position: relative; z-index: 1; padding-top: var(--ticker-h); max-width: 1800px; margin: 0 auto; }
+
+    /* HEADER */
+    .station-header {
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      align-items: center; padding: 24px 40px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(11,11,20,0.95) 0%, rgba(5,5,10,0.8) 100%);
+      backdrop-filter: blur(12px);
+      position: sticky; top: var(--ticker-h); z-index: 100;
+    }
+    .station-logo-block { display: flex; flex-direction: column; gap: 4px; }
+    .station-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(28px, 4vw, 52px); letter-spacing: 4px; line-height: 1;
+      background: linear-gradient(135deg, var(--amber) 0%, var(--amber2) 60%, var(--amber3) 100%);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .station-subtitle {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px; letter-spacing: 5px; color: var(--amber4);
+      text-transform: uppercase; font-weight: 700;
+    }
+    .station-tagline {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--fs-xs); letter-spacing: 3px; color: var(--muted); text-transform: uppercase; margin-top: 2px;
+    }
+
+    /* ON AIR */
+    .onair-badge { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .onair-ring { position: relative; width: 88px; height: 88px; }
+    .onair-ring-svg { position: absolute; inset: -14px; animation: spin-slow 12s linear infinite; }
+    .onair-ring-svg circle { fill: none; stroke: var(--amber); stroke-width: 1; stroke-dasharray: 4 8; opacity: 0.4; }
+    [data-status="offline"] .onair-ring-svg circle { stroke: var(--muted2); }
+    @keyframes spin-slow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+    .onair-circle {
+      width: 88px; height: 88px; border-radius: 50%;
+      border: 2px solid var(--red);
+      display: flex; align-items: center; justify-content: center; position: relative;
+      box-shadow: 0 0 28px var(--glow-r), inset 0 0 20px rgba(239,68,68,0.1);
+      transition: all 0.5s ease;
+    }
+    [data-status="offline"] .onair-circle { border-color: var(--muted2); box-shadow: none; }
+    .onair-circle::before {
+      content:''; position:absolute; inset:-10px; border-radius:50%;
+      border:1.5px solid var(--red); opacity:0; animation:pulse-out 2s ease-out infinite;
+    }
+    [data-status="offline"] .onair-circle::before { display: none; }
+    .onair-circle::after {
+      content:''; position:absolute; inset:-20px; border-radius:50%;
+      border:1px solid var(--red); opacity:0; animation:pulse-out 2s ease-out infinite 0.5s;
+    }
+    [data-status="offline"] .onair-circle::after { display: none; }
+    @keyframes pulse-out { 0%{transform:scale(0.9);opacity:0.5} 100%{transform:scale(1.3);opacity:0} }
+    .onair-inner {
+      width: 62px; height: 62px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--red2), var(--red));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 2px; color: #fff;
+      animation: flicker-red 1.6s step-start infinite;
+      box-shadow: 0 0 15px rgba(239,68,68,0.4);
+    }
+    [data-status="offline"] .onair-inner { background: var(--muted2); animation: none; box-shadow: none; }
+    @keyframes flicker-red { 0%,47%,52%,100%{opacity:1} 48%,51%{opacity:0.6} }
+    .onair-status-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px; letter-spacing: 3px; color: var(--red); font-weight: 700; text-transform: uppercase;
+    }
+    [data-status="offline"] .onair-status-label { color: var(--muted); }
+
+    .station-freq { text-align: right; }
+    .freq-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(22px, 3vw, 44px); color: var(--amber2); letter-spacing: 3px; line-height: 1;
+    }
+    .freq-band { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 5px; color: var(--muted); margin-top: 4px; text-transform: uppercase; }
+    .freq-clock { font-family: 'JetBrains Mono', monospace; font-size: var(--fs-xs); color: var(--muted2); margin-top: 8px; }
+    .freq-listeners { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; color: var(--amber4); margin-top: 6px; letter-spacing: 2px; }
+
+    /* NAV TABS */
+    .nav-tabs {
+      display: flex; border-bottom: 1px solid var(--border);
+      background: rgba(11,11,20,0.8); overflow-x: auto; scrollbar-width: none;
+      position: sticky; top: calc(var(--ticker-h) + 92px); z-index: 90;
+    }
+    .nav-tabs::-webkit-scrollbar { display: none; }
+    .nav-tab {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+      padding: 12px 24px; color: var(--muted); border-bottom: 2px solid transparent;
+      cursor: pointer; white-space: nowrap; transition: all 0.2s ease;
+      background: none; border-top: none; border-left: none; border-right: none;
+    }
+    .nav-tab:hover { color: var(--amber2); }
+    .nav-tab.active { color: var(--amber); border-bottom-color: var(--amber); }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .main-grid { display: grid; grid-template-columns: 1fr 380px; min-height: calc(100vh - 220px); }
+    .left-panel { border-right: 1px solid var(--border); display: flex; flex-direction: column; }
+
+    /* PLAYER SECTION */
+    .player-section {
+      padding: 28px 36px; border-bottom: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(11,11,20,0.6) 0%, rgba(5,5,10,0.4) 100%);
+    }
+    .now-playing-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+    .now-playing-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 5px; color: var(--amber); font-weight: 700; text-transform: uppercase; }
+    .stream-quality-badge {
+      font-family: 'JetBrains Mono', monospace; font-size: var(--fs-xs); color: var(--muted);
+      border: 1px solid var(--border2); padding: 3px 8px; border-radius: 3px; letter-spacing: 1px;
+    }
+    .now-playing-title {
+      font-family: 'Syne', sans-serif; font-size: clamp(16px, 2.2vw, 26px); font-weight: 700;
+      line-height: 1.3; color: var(--white); margin-bottom: 6px; transition: opacity 0.3s ease;
+    }
+    .now-playing-artist {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 13px; color: var(--amber2);
+      letter-spacing: 1px; opacity: 0.85; transition: opacity 0.3s ease;
+    }
+
+    /* PLAYER CARD */
+    .player-card {
+      background: var(--bg3); border: 1px solid var(--border2);
+      border-radius: 12px; padding: 22px; margin-top: 18px; position: relative; overflow: hidden;
+    }
+    .player-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(245,158,11,0.03) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    #vizCanvas {
+      width: 100%; height: 64px; border-radius: 6px;
+      background: var(--bg); display: block; margin-bottom: 16px; border: 1px solid var(--border);
+    }
+
+    /* ══ AUDIO MODE INDICATOR ══ */
+    .mode-indicator {
+      display: flex; align-items: center; gap: 8px;
+      font-family: 'JetBrains Mono', monospace; font-size: 9px;
+      letter-spacing: 2px; color: var(--muted); margin-bottom: 12px;
+      padding: 6px 10px; background: var(--bg2); border-radius: 4px;
+      border: 1px solid var(--border); text-transform: uppercase;
+    }
+    .mode-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
+    .mode-dot.live { background: var(--red); animation: blink-dot 1.2s step-start infinite; }
+    .mode-dot.session { background: var(--green); }
+
+    /* HIDDEN AUDIO */
+    #audioPlayer { display: none; }
+
+    /* CONTROLS */
+    .controls-row { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 16px; }
+    .ctrl-btn {
+      width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--border2);
+      background: var(--bg2); color: var(--amber); font-size: 17px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: all 0.25s ease;
+    }
+    .ctrl-btn:hover { border-color: var(--amber); background: var(--glow-a); transform: scale(1.08); }
+    .ctrl-btn:active { transform: scale(0.96); }
+    .play-btn {
+      width: 66px; height: 66px;
+      background: linear-gradient(135deg, var(--amber) 0%, var(--amber2) 100%);
+      border: none; color: var(--bg); font-size: 28px; border-radius: 50%;
+      box-shadow: 0 0 24px var(--glow-a), 0 4px 12px rgba(0,0,0,0.4); transition: all 0.25s ease;
+    }
+    .play-btn:hover { transform: scale(1.1); box-shadow: 0 0 40px rgba(245,158,11,0.5); }
+    .play-btn.is-playing { animation: pulse-play 2s ease-in-out infinite; }
+    @keyframes pulse-play { 0%,100%{box-shadow:0 0 24px rgba(245,158,11,0.4)} 50%{box-shadow:0 0 48px rgba(245,158,11,0.7)} }
+
+    /* VOLUME */
+    .volume-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .vol-icon { font-size: 13px; color: var(--muted); flex-shrink: 0; }
+    .vol-label { font-size: var(--fs-xs); color: var(--muted); width: 30px; text-align: right; }
+    input[type=range].vol-slider {
+      flex: 1; height: 3px; -webkit-appearance: none; appearance: none;
+      background: var(--border2); border-radius: 2px; cursor: pointer; outline: none;
+    }
+    input[type=range].vol-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 14px; height: 14px;
+      border-radius: 50%; background: var(--amber); box-shadow: 0 0 8px rgba(245,158,11,0.4); cursor: pointer;
+    }
+    input[type=range].vol-slider::-moz-range-thumb {
+      width: 14px; height: 14px; border-radius: 50%; background: var(--amber); border: none; cursor: pointer;
+    }
+
+    /* STREAM BTNS */
+    .stream-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .btn-stream {
+      padding: 11px 8px; border-radius: 6px;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase; cursor: pointer; border: none; transition: all 0.25s ease;
+    }
+    .btn-stream.primary { background: linear-gradient(135deg, var(--green), #059669); color: #fff; }
+    .btn-stream.secondary { background: transparent; border: 1.5px solid var(--border2); color: var(--amber); }
+    .btn-stream:hover { transform: translateY(-2px); }
+    .btn-stream.primary:hover { box-shadow: 0 4px 20px rgba(16,185,129,0.4); }
+    .btn-stream.secondary:hover { border-color: var(--amber); background: var(--glow-a); }
+
+    /* EQ SECTION */
+    .eq-section {
+      padding: 20px 36px; border-bottom: 1px solid var(--border);
+      display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px; background: rgba(0,0,0,0.2);
+    }
+    .eq-bars { display: flex; gap: 4px; align-items: flex-end; height: 40px; }
+    .eq-bar {
+      width: 5px; border-radius: 2px 2px 0 0; background: var(--amber);
+      transform-origin: bottom; animation: eq-wave 1s ease-in-out infinite; opacity: 0.8;
+    }
+    .eq-bar:nth-child(2n) { background: var(--amber2); animation-duration: 0.85s; }
+    .eq-bar:nth-child(3n) { animation-duration: 1.15s; animation-delay: 0.1s; }
+    .eq-bar:nth-child(4n) { animation-duration: 0.7s; animation-delay: 0.2s; }
+    .eq-bar:nth-child(5n) { animation-duration: 1.3s; animation-delay: 0.05s; }
+    .eq-bar:nth-child(6n) { background: var(--amber3); animation-duration: 0.9s; }
+    .eq-bar:nth-child(7n) { animation-duration: 1.05s; animation-delay: 0.15s; }
+    body:not(.is-playing-body) .eq-bar { animation: none; height: 3px !important; opacity: 0.3; }
+    @keyframes eq-wave { 0%,100%{transform:scaleY(0.15)} 50%{transform:scaleY(1)} }
+    .stream-meta { text-align: right; }
+    .stream-meta-value { font-family:'Bebas Neue',sans-serif; font-size:28px; color:var(--amber2); letter-spacing:1px; line-height:1; }
+    .stream-meta-label { font-size:var(--fs-xs); color:var(--muted); letter-spacing:2px; margin-top:2px; }
+
+    /* PLAYLIST */
+    .playlist-header {
+      padding: 14px 36px; display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: calc(var(--ticker-h) + 92px + 45px); z-index: 50;
+      background: rgba(11,11,20,0.97); backdrop-filter: blur(8px);
+    }
+    .playlist-title { font-family:'Bebas Neue',sans-serif; font-size:15px; letter-spacing:3px; color:var(--amber); }
+    .playlist-search { display: flex; align-items: center; gap: 10px; }
+    #searchInput {
+      background: var(--bg3); border: 1px solid var(--border2); border-radius: 5px;
+      padding: 5px 12px; font-family: 'JetBrains Mono', monospace; font-size: var(--fs-xs);
+      color: var(--white); outline: none; width: 140px; transition: all 0.2s;
+    }
+    #searchInput:focus { border-color: var(--amber); width: 180px; box-shadow: 0 0 10px var(--glow-a); }
+    #searchInput::placeholder { color: var(--muted2); }
+    .badge {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 2px;
+      background: var(--bg4); border: 1px solid var(--border); color: var(--muted); padding: 4px 10px; border-radius: 4px;
+    }
+    .playlist-scroll {
+      flex: 1; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--border2) transparent;
+      max-height: calc(100vh - 520px); min-height: 250px;
+    }
+    .playlist-scroll::-webkit-scrollbar { width: 6px; }
+    .playlist-scroll::-webkit-scrollbar-track { background: transparent; }
+    .playlist-scroll::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+    .track-row {
+      display: grid; grid-template-columns: 44px 1fr 30px;
+      align-items: center; padding: 10px 36px; gap: 12px;
+      border-bottom: 1px solid rgba(34,34,58,0.4);
+      cursor: pointer; transition: background 0.15s ease, border-left 0.15s ease, padding-left 0.15s ease;
+    }
+    .track-row:hover { background: rgba(245,158,11,0.04); border-left: 2px solid var(--amber4); padding-left: 34px; }
+    .track-row.active { background: rgba(245,158,11,0.1); border-left: 3px solid var(--amber); padding-left: 33px; }
+    .track-num { font-size:var(--fs-xs); color:var(--muted2); letter-spacing:1px; text-align:right; font-weight:600; }
+    .track-row.active .track-num { color: var(--amber); }
+    .track-info { display: flex; flex-direction: column; gap: 2px; }
+    .track-title { font-size:var(--fs-sm); color:var(--white); line-height:1.4; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .track-row.active .track-title { color: var(--amber2); }
+    .track-artist { font-size:var(--fs-xs); color:var(--muted); letter-spacing:0.5px; }
+    .track-icon { font-size:11px; color:var(--muted2); text-align:center; }
+    .track-row.active .track-icon { color:var(--amber); animation:eq-wave-icon 0.8s ease-in-out infinite alternate; }
+    @keyframes eq-wave-icon { from{opacity:0.5;transform:scale(0.9)} to{opacity:1;transform:scale(1.1)} }
+
+    /* SESSION TRACKS (playable) */
+    .track-row.session-track { border-left: 2px solid rgba(16,185,129,0.3); }
+    .track-row.session-track .track-num { color: var(--green); }
+    .track-row.session-track:hover { border-left-color: var(--green); background: rgba(16,185,129,0.05); }
+    .track-row.session-track.active { border-left-color: var(--green); background: rgba(16,185,129,0.1); }
+    .track-row.session-track.active .track-title { color: #34d399; }
+    .playable-badge {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase; padding: 2px 5px; border-radius: 3px;
+      background: rgba(16,185,129,0.15); color: var(--green); border: 1px solid rgba(16,185,129,0.3);
+      white-space: nowrap; margin-top: 2px; display: inline-block;
+    }
+
+    /* RIGHT PANEL */
+    .right-panel {
+      display: flex; flex-direction: column;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+      overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--border2) transparent;
+    }
+    .right-panel::-webkit-scrollbar { width: 5px; }
+    .right-panel::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+    .r-section { padding: 22px 24px; border-bottom: 1px solid var(--border); }
+    .r-title {
+      font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 3px;
+      color: var(--muted); text-transform: uppercase; margin-bottom: 14px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .r-title-line { flex: 1; height: 1px; background: linear-gradient(to right, var(--border2), transparent); }
+    .info-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 9px 0; border-bottom: 1px solid rgba(34,34,58,0.4); font-size: var(--fs-sm);
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+    .info-val { color:var(--white); font-weight:600; font-size:var(--fs-xs); text-align:right; display:flex; align-items:center; gap:6px; }
+    .live-dot { width:8px; height:8px; border-radius:50%; background:var(--red); animation:blink-dot 1.2s step-start infinite; display:inline-block; }
+    [data-status="offline"] .live-dot { background:var(--muted2); animation:none; }
+
+    /* VIDEO CARD */
+    .video-card { background:var(--bg3); border:1px solid var(--border2); border-radius:var(--radius); overflow:hidden; }
+    .video-thumb {
+      width:100%; aspect-ratio:16/9;
+      background:linear-gradient(135deg,var(--bg4),var(--bg2));
+      display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;
+    }
+    .video-thumb::before {
+      content:''; position:absolute; inset:0;
+      background:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(245,158,11,0.02) 20px,rgba(245,158,11,0.02) 40px);
+    }
+    .video-thumb-label {
+      position:absolute; bottom:10px; right:10px; font-family:'JetBrains Mono',monospace;
+      font-size:var(--fs-xs); color:var(--muted); background:rgba(5,5,10,0.8);
+      padding:3px 8px; border-radius:3px; letter-spacing:1px;
+    }
+    .video-play-btn {
+      width:52px; height:52px; border-radius:50%;
+      background:linear-gradient(135deg,var(--amber),var(--amber2));
+      display:flex; align-items:center; justify-content:center; text-decoration:none;
+      box-shadow:0 0 24px rgba(245,158,11,0.4); transition:all 0.3s; position:relative; z-index:1;
+    }
+    .video-play-btn:hover { transform:scale(1.15); box-shadow:0 0 40px rgba(245,158,11,0.6); }
+    .video-meta { padding:14px 16px; display:flex; flex-direction:column; gap:5px; }
+    .video-meta-title { font-family:'Syne',sans-serif; font-size:var(--fs-base); font-weight:700; color:var(--white); }
+    .video-meta-sub { font-size:var(--fs-xs); color:var(--muted); letter-spacing:1px; }
+    .video-link {
+      display:inline-block; margin-top:6px; font-family:'Barlow Condensed',sans-serif;
+      font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--amber);
+      text-decoration:none; border:1px solid var(--amber4); padding:6px 14px; border-radius:4px;
+      transition:all 0.2s; width:fit-content;
+    }
+    .video-link:hover { background:var(--amber); color:var(--bg); border-color:var(--amber); }
+
+    /* GENRE TAGS */
+    .genre-tags { display:flex; flex-wrap:wrap; gap:6px; }
+    .genre-tag {
+      font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:1.5px;
+      padding:5px 11px; border:1px solid var(--border2); color:var(--muted);
+      border-radius:4px; cursor:pointer; transition:all 0.2s ease; font-weight:600; text-transform:uppercase;
+    }
+    .genre-tag:hover, .genre-tag.active { border-color:var(--amber); color:var(--amber); background:var(--glow-a); }
+    .genre-tag.hot { border-color:var(--amber4); color:var(--amber2); background:rgba(245,158,11,0.04); }
+
+    /* SOCIAL LINKS */
+    .social-links { display:flex; flex-direction:column; gap:8px; }
+    .social-link {
+      display:flex; align-items:center; gap:10px; padding:9px 12px;
+      background:var(--bg3); border:1px solid var(--border);
+      border-radius:6px; text-decoration:none; color:var(--muted);
+      font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:700;
+      text-transform:uppercase; letter-spacing:1.5px; transition:all 0.2s;
+    }
+    .social-link:hover { border-color:var(--amber4); color:var(--amber2); background:var(--glow-a); transform:translateX(4px); }
+    .social-icon { font-size:15px; }
+    .social-arrow { margin-left:auto; opacity:0.5; }
+
+    /* PROG GRID */
+    .prog-grid { display:flex; flex-direction:column; gap:10px; }
+    .prog-row {
+      display:grid; grid-template-columns:80px 1fr; gap:12px; align-items:start;
+      padding:12px; background:var(--bg3); border:1px solid var(--border); border-radius:6px; transition:all 0.2s;
+    }
+    .prog-row:hover { border-color:var(--amber4); background:var(--amber5); }
+    .prog-row.vermut { border-color:var(--amber4); background:rgba(245,158,11,0.06); }
+    .prog-time { font-family:'Bebas Neue',sans-serif; font-size:18px; color:var(--amber); letter-spacing:1px; line-height:1; }
+    .prog-day { font-family:'Barlow Condensed',sans-serif; font-size:10px; color:var(--muted); letter-spacing:2px; text-transform:uppercase; }
+    .prog-name { font-family:'Syne',sans-serif; font-size:13px; font-weight:700; color:var(--white); margin-bottom:3px; }
+    .prog-desc { font-size:var(--fs-xs); color:var(--muted); letter-spacing:0.5px; line-height:1.5; }
+    .prog-badge {
+      display:inline-block; font-family:'Barlow Condensed',sans-serif; font-size:10px;
+      font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:3px 8px; border-radius:3px; margin-top:6px;
+    }
+    .prog-badge.live { background:rgba(239,68,68,0.15); color:var(--red); border:1px solid rgba(239,68,68,0.3); }
+    .prog-badge.rec  { background:rgba(16,185,129,0.1); color:var(--green); border:1px solid rgba(16,185,129,0.3); }
+
+    /* SESSIONS */
+    .sessions-grid { display:flex; flex-direction:column; gap:0; }
+    .session-row {
+      display:grid; grid-template-columns:60px 1fr auto; gap:14px; align-items:center;
+      padding:16px 36px; border-bottom:1px solid rgba(34,34,58,0.4); cursor:pointer; transition:all 0.2s;
+    }
+    .session-row:hover { background:rgba(245,158,11,0.04); border-left:2px solid var(--amber4); padding-left:34px; }
+    .session-num { font-family:'Bebas Neue',sans-serif; font-size:32px; color:var(--amber); letter-spacing:1px; line-height:1; }
+    .session-info { display:flex; flex-direction:column; gap:4px; }
+    .session-title { font-family:'Syne',sans-serif; font-size:14px; font-weight:700; color:var(--white); }
+    .session-meta { font-size:var(--fs-xs); color:var(--muted); letter-spacing:1px; }
+    .session-meta span { color:var(--amber4); }
+    .session-tags { display:flex; gap:5px; flex-wrap:wrap; margin-top:4px; }
+    .session-tag {
+      font-family:'Barlow Condensed',sans-serif; font-size:10px; font-weight:700; letter-spacing:1px;
+      text-transform:uppercase; padding:2px 7px; border-radius:3px;
+      background:var(--bg4); border:1px solid var(--border2); color:var(--muted);
+    }
+    .session-action {
+      font-size:11px; color:var(--amber4); text-decoration:none; border:1px solid var(--border2);
+      padding:6px 12px; border-radius:4px; white-space:nowrap;
+      font-family:'Barlow Condensed',sans-serif; font-weight:700; letter-spacing:1px; text-transform:uppercase; transition:all 0.2s;
+    }
+    .session-action:hover { border-color:var(--amber); color:var(--amber); background:var(--glow-a); }
+    .sessions-header {
+      padding:14px 36px; display:flex; justify-content:space-between; align-items:center;
+      border-bottom:1px solid var(--border); background:rgba(11,11,20,0.97); backdrop-filter:blur(8px);
+    }
+    .sessions-title { font-family:'Bebas Neue',sans-serif; font-size:15px; letter-spacing:3px; color:var(--amber); }
+
+    /* TEAM BUILDING */
+    .tb-section { padding:36px 36px; border-bottom:1px solid var(--border); }
+    .tb-headline {
+      font-family:'Bebas Neue',sans-serif; font-size:clamp(28px,3vw,44px); letter-spacing:3px; line-height:1.1; margin-bottom:8px;
+      background:linear-gradient(135deg,var(--amber),var(--amber2));
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    .tb-sub { font-family:'Barlow Condensed',sans-serif; font-size:15px; color:var(--muted); letter-spacing:2px; text-transform:uppercase; margin-bottom:28px; }
+    .tb-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; }
+    .tb-card {
+      background:var(--bg3); border:1px solid var(--border2); border-radius:10px; padding:20px;
+      transition:all 0.3s; position:relative; overflow:hidden;
+    }
+    .tb-card::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:2px;
+      background:linear-gradient(90deg,var(--amber),var(--amber2));
+      transform:scaleX(0); transform-origin:left; transition:transform 0.3s;
+    }
+    .tb-card:hover { border-color:var(--amber4); background:var(--amber5); }
+    .tb-card:hover::before { transform:scaleX(1); }
+    .tb-icon { font-size:28px; margin-bottom:12px; display:block; }
+    .tb-card-title { font-family:'Syne',sans-serif; font-size:14px; font-weight:700; color:var(--white); margin-bottom:8px; }
+    .tb-card-desc { font-size:var(--fs-xs); color:var(--muted); line-height:1.7; letter-spacing:0.3px; }
+    .manada-quote { font-family:'Barlow Condensed',sans-serif; font-size:15px; font-style:italic; line-height:1.7; color:var(--white); border-left:3px solid var(--amber); padding-left:14px; opacity:0.85; }
+
+    /* FOOTER */
+    .site-footer {
+      border-top:1px solid var(--border); padding:18px 40px;
+      display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;
+      background:rgba(5,5,10,0.9); backdrop-filter:blur(12px);
+    }
+    .footer-brand {
+      font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:3px;
+      background:linear-gradient(135deg,var(--amber),var(--amber2));
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    .footer-links { display:flex; gap:20px; flex-wrap:wrap; }
+    .footer-link {
+      font-family:'Barlow Condensed',sans-serif; font-size:11px; color:var(--amber4);
+      text-decoration:none; letter-spacing:1.5px; font-weight:700; text-transform:uppercase; transition:color 0.2s;
+    }
+    .footer-link:hover { color:var(--amber2); }
+    .footer-copy { font-size:var(--fs-xs); color:var(--muted2); letter-spacing:1px; }
+    .footer-legal { font-size:var(--fs-xs); color:var(--muted2); letter-spacing:0.5px; line-height:1.6; }
+
+    /* TOAST */
+    .toast-wrap { position:fixed; bottom:24px; right:24px; z-index:1000; display:flex; flex-direction:column; gap:8px; pointer-events:none; }
+    .toast {
+      background:var(--bg3); border:1px solid var(--border2); border-radius:8px;
+      padding:12px 16px; font-size:var(--fs-xs); font-family:'JetBrains Mono',monospace;
+      color:var(--white); letter-spacing:1px; box-shadow:0 8px 32px rgba(0,0,0,0.4);
+      opacity:0; transform:translateY(10px); animation:toast-in 0.3s ease forwards; max-width:300px;
+    }
+    @keyframes toast-in { to{opacity:1;transform:translateY(0)} }
+    .toast.out { animation:toast-out 0.3s ease forwards; }
+    @keyframes toast-out { to{opacity:0;transform:translateY(10px)} }
+
+    .kbd-hint { position:fixed; bottom:24px; left:24px; font-size:var(--fs-xs); color:var(--muted2); font-family:'JetBrains Mono',monospace; letter-spacing:1px; pointer-events:none; }
+    kbd { background:var(--bg3); border:1px solid var(--border2); border-radius:3px; padding:2px 5px; font-size:var(--fs-xs); }
+
+    .reveal { opacity:0; transform:translateY(16px); transition:opacity 0.4s ease, transform 0.4s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width:1100px) {
+      .main-grid { grid-template-columns:1fr 320px; }
+      .station-header { padding:20px 28px; }
+      .player-section { padding:22px 28px; }
+      .eq-section { padding:16px 28px; }
+      .playlist-header { padding:12px 28px; }
+      .track-row { padding:9px 28px; }
+      .session-row { padding:14px 28px; }
+      .tb-section { padding:28px 28px; }
+    }
+    @media (max-width:900px) {
+      .main-grid { grid-template-columns:1fr; }
+      .right-panel { display:none; }
+      .station-header { grid-template-columns:1fr auto; padding:16px 20px; }
+      .station-freq { display:none; }
+      .player-section,.eq-section { padding:18px 20px; }
+      .playlist-header,.sessions-header { padding:12px 20px; }
+      .track-row,.session-row { padding:9px 20px; }
+      .tb-section { padding:24px 20px; }
+      .site-footer { padding:14px 20px; }
+    }
+    @media (max-width:480px) {
+      .ticker-badge { display:none; }
+      .station-logo { font-size:26px; }
+      .onair-ring,.onair-circle { width:72px; height:72px; }
+      .onair-inner { width:50px; height:50px; font-size:11px; }
+      .stream-btns { grid-template-columns:1fr; }
+      .footer-links { display:none; }
+      .tb-cards { grid-template-columns:1fr; }
+      .kbd-hint { display:none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scanlines"></div>
+  <div class="bg-mesh"></div>
+  <div class="toast-wrap" id="toastWrap"></div>
+
+  <div class="ticker-wrap">
+    <div class="ticker-badge">
+      <span class="ticker-live-dot"></span>
+      🔊 BRM RADIO
+    </div>
+    <div class="ticker-overflow">
+      <div class="ticker-track" id="tickerTrack"></div>
+    </div>
+  </div>
+
+  <div class="page">
+    <header class="station-header">
+      <div class="station-logo-block">
+        <div class="station-logo">BUBATRONIK_BRM</div>
+        <div class="station-subtitle">Frecuencia Sant Salvador</div>
+        <div class="station-tagline">WorldMOS · AguaFlow · DPN-Game · © 2026</div>
+      </div>
+      <div class="onair-badge">
+        <div class="onair-ring">
+          <svg class="onair-ring-svg" viewBox="0 0 116 116" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="58" cy="58" r="55"/>
+          </svg>
+          <div class="onair-circle">
+            <div class="onair-inner" id="onairInner">ON AIR</div>
+          </div>
+        </div>
+        <div class="onair-status-label" id="onairLabel">▶ EMITIENDO EN VIVO</div>
+      </div>
+      <div class="station-freq">
+        <div class="freq-number">666.333</div>
+        <div class="freq-band">Digital · Open Format · Stream</div>
+        <div class="freq-clock" id="clock">--:-- · --/--/----</div>
+        <div class="freq-listeners" id="freqListeners">● OYENTES: ---</div>
+      </div>
+    </header>
+
+    <nav class="nav-tabs" role="tablist">
+      <button class="nav-tab active" data-tab="radio" role="tab">📻 Radio</button>
+      <button class="nav-tab" data-tab="sessions" role="tab">🎛️ Sesiones</button>
+      <button class="nav-tab" data-tab="programacion" role="tab">📅 Programación</button>
+      <button class="nav-tab" data-tab="manada" role="tab">🐺 La Manada</button>
+      <button class="nav-tab" data-tab="teambuilding" role="tab">🏢 Team Building</button>
+    </nav>
+
+    <!-- TAB: RADIO -->
+    <div class="tab-panel active" id="tab-radio">
+      <div class="main-grid">
+        <div class="left-panel">
+          <div class="player-section">
+            <div class="now-playing-header">
+              <div class="now-playing-label">▶ SONANDO AHORA</div>
+              <div class="stream-quality-badge">128kbps · MP3 · Stereo</div>
+            </div>
+            <div class="now-playing-title" id="npTitle">BUBATRONIK_BRM EN VIVO</div>
+            <div class="now-playing-artist" id="npArtist">Streaming en directo — Sant Salvador, Tarragona</div>
+
+            <div class="player-card">
+              <canvas id="vizCanvas"></canvas>
+
+              <!-- ══ AUDIO ELEMENT — SIN <source> TAGS, src asignado por JS ══ -->
+              <audio id="audioPlayer" preload="none" crossorigin="anonymous"></audio>
+
+              <!-- Indicador de modo -->
+              <div class="mode-indicator" id="modeIndicator">
+                <span class="mode-dot" id="modeDot"></span>
+                <span id="modeText">EN ESPERA — PULSA PLAY</span>
+              </div>
+
+              <div class="controls-row">
+                <button class="ctrl-btn" id="btnPrev" title="Anterior (A)">⏮</button>
+                <button class="ctrl-btn play-btn" id="btnPlay" title="Play/Pause (Espacio)">▶</button>
+                <button class="ctrl-btn" id="btnNext" title="Siguiente (D)">⏭</button>
+              </div>
+
+              <div class="volume-row">
+                <span class="vol-icon">🔈</span>
+                <input type="range" class="vol-slider" id="volSlider" min="0" max="1" step="0.01" value="0.8">
+                <span class="vol-label" id="volLabel">80%</span>
+              </div>
+
+              <div class="stream-btns">
+                <button class="btn-stream primary" onclick="openNativePlayer()">🌐 Player Web Nativo</button>
+                <button class="btn-stream secondary" onclick="shareRadio()">📡 Compartir</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="eq-section">
+            <div class="eq-bars" id="eqBars"></div>
+            <div class="stream-meta">
+              <div class="stream-meta-value">709+</div>
+              <div class="stream-meta-label">TRACKS EN COLECCIÓN</div>
+            </div>
+          </div>
+
+          <div class="playlist-header">
+            <div class="playlist-title">📻 PLAYLIST BRM</div>
+            <div class="playlist-search">
+              <input type="text" id="searchInput" placeholder="Buscar track...">
+              <div class="badge" id="trackBadge">709 TRACKS</div>
+            </div>
+          </div>
+          <div class="playlist-scroll" id="playlistScroll"></div>
+        </div>
+
+        <div class="right-panel">
+          <div class="r-section">
+            <div class="r-title">📡 ESTADO EN VIVO<div class="r-title-line"></div></div>
+            <div class="info-row">
+              <span class="info-label">Emisión</span>
+              <span class="info-val"><span class="live-dot"></span><span id="statusText">Verificando...</span></span>
+            </div>
+            <div class="info-row"><span class="info-label">Servidor</span><span class="info-val">Shoutcast · MIXX</span></div>
+            <div class="info-row"><span class="info-label">Bitrate</span><span class="info-val">128 kbps · MP3</span></div>
+            <div class="info-row"><span class="info-label">Formato</span><span class="info-val">OPEN FORMAT</span></div>
+            <div class="info-row"><span class="info-label">Ubicación</span><span class="info-val">📍 Sant Salvador, Tarragona</span></div>
+            <div class="info-row"><span class="info-label">Oyentes</span><span class="info-val" id="listenerCount">---</span></div>
+            <div class="info-row"><span class="info-label">Colección</span><span class="info-val">709+ tracks</span></div>
+          </div>
+          <div class="r-section">
+            <div class="r-title">📺 SESIÓN ON AIR<div class="r-title-line"></div></div>
+            <div class="video-card">
+              <div class="video-thumb">
+                <a class="video-play-btn" href="https://drive.google.com/file/d/1SopFdy3rmWlxUunYdfvJz0kyrXDcO2jN/view" target="_blank" rel="noopener">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="#05050a"><polygon points="5,3 17,10 5,17"/></svg>
+                </a>
+                <div class="video-thumb-label">4.96 GB · FULL SESSION</div>
+              </div>
+              <div class="video-meta">
+                <div class="video-meta-title">SESIÓN 3 — BUBATRONIK_BRM</div>
+                <div class="video-meta-sub">SESIÓN LARGA · OPEN FORMAT · 6h · 2026</div>
+                <a class="video-link" href="https://drive.google.com/file/d/1SopFdy3rmWlxUunYdfvJz0kyrXDcO2jN/view" target="_blank" rel="noopener">▶ ABRIR EN DRIVE</a>
+              </div>
+            </div>
+          </div>
+          <div class="r-section">
+            <div class="r-title">🎵 GÉNEROS<div class="r-title-line"></div></div>
+            <div class="genre-tags" id="genreTags">
+              <span class="genre-tag hot" data-genre="hip hop">Hip Hop</span>
+              <span class="genre-tag hot" data-genre="soul">Soul</span>
+              <span class="genre-tag hot" data-genre="electronic">Electronic</span>
+              <span class="genre-tag hot" data-genre="deep house">Deep House</span>
+              <span class="genre-tag hot" data-genre="afro">Afro</span>
+              <span class="genre-tag hot" data-genre="rap">Rap Esp</span>
+              <span class="genre-tag hot" data-genre="techno">Techno</span>
+              <span class="genre-tag hot" data-genre="eurodance">Eurodance</span>
+              <span class="genre-tag" data-genre="blues">Blues</span>
+              <span class="genre-tag" data-genre="rock">Rock</span>
+              <span class="genre-tag" data-genre="folk">Folk</span>
+              <span class="genre-tag" data-genre="neo soul">Neo Soul</span>
+              <span class="genre-tag" data-genre="hardstyle">Hardstyle</span>
+              <span class="genre-tag hot" data-genre="">Open Format</span>
+            </div>
+          </div>
+          <div class="r-section">
+            <div class="r-title">🔗 CONECTA<div class="r-title-line"></div></div>
+            <div class="social-links">
+              <a class="social-link" href="https://www.instagram.com/bubatronik_brm/" target="_blank" rel="noopener"><span class="social-icon">📸</span> @bubatronik_brm<span class="social-arrow">→</span></a>
+              <a class="social-link" href="https://bubatronik.radiostream321.com/" target="_blank" rel="noopener"><span class="social-icon">🌐</span> Stream Web Nativo<span class="social-arrow">→</span></a>
+              <a class="social-link" href="https://drive.google.com/drive/folders/1XjSOxAVIAXA3R6qkOi3Uv_5rSdG5rLO0" target="_blank" rel="noopener"><span class="social-icon">💾</span> Archivo en Drive<span class="social-arrow">→</span></a>
+              <a class="social-link" href="mailto:rubenrodriguez.f.93@gmail.com"><span class="social-icon">📧</span> Contacto directo<span class="social-arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: SESIONES -->
+    <div class="tab-panel" id="tab-sessions">
+      <div class="sessions-header reveal">
+        <div class="sessions-title">🎛️ ARCHIVO DE SESIONES</div>
+        <div class="badge">3 SESIONES · DRIVE</div>
+      </div>
+      <div class="sessions-grid">
+        <div class="session-row reveal" onclick="openSession('https://drive.google.com/file/d/1SopFdy3rmWlxUunYdfvJz0kyrXDcO2jN/view')">
+          <div class="session-num">03</div>
+          <div class="session-info">
+            <div class="session-title">SESIÓN 3 — La Grande</div>
+            <div class="session-meta">2026 · <span>4.96 GB</span> · ~6 horas · Sant Salvador</div>
+            <div class="session-tags"><span class="session-tag">Open Format</span><span class="session-tag">Sesión larga</span><span class="session-tag">Ambient de barrio</span></div>
+          </div>
+          <a class="session-action" href="https://drive.google.com/file/d/1SopFdy3rmWlxUunYdfvJz0kyrXDcO2jN/view" target="_blank" rel="noopener" onclick="event.stopPropagation()">▶ Ver</a>
+        </div>
+        <div class="session-row reveal" onclick="openSession('https://drive.google.com/drive/folders/1XjSOxAVIAXA3R6qkOi3Uv_5rSdG5rLO0')">
+          <div class="session-num">02</div>
+          <div class="session-info">
+            <div class="session-title">SESIÓN 2 — El Retorno</div>
+            <div class="session-meta">2025 · Archivo Drive · Multi-género</div>
+            <div class="session-tags"><span class="session-tag">Hip Hop</span><span class="session-tag">Soul</span><span class="session-tag">Electronic</span></div>
+          </div>
+          <a class="session-action" href="https://drive.google.com/drive/folders/1XjSOxAVIAXA3R6qkOi3Uv_5rSdG5rLO0" target="_blank" rel="noopener" onclick="event.stopPropagation()">▶ Drive</a>
+        </div>
+        <div class="session-row reveal" onclick="openSession('https://drive.google.com/drive/folders/1XjSOxAVIAXA3R6qkOi3Uv_5rSdG5rLO0')">
+          <div class="session-num">01</div>
+          <div class="session-info">
+            <div class="session-title">SESIÓN 1 — El Comienzo</div>
+            <div class="session-meta">2024 · Primera sesión oficial · Tarragona</div>
+            <div class="session-tags"><span class="session-tag">Rock</span><span class="session-tag">Funk</span><span class="session-tag">Rap</span><span class="session-tag">Multigenero</span></div>
+          </div>
+          <a class="session-action" href="https://drive.google.com/drive/folders/1XjSOxAVIAXA3R6qkOi3Uv_5rSdG5rLO0" target="_blank" rel="noopener" onclick="event.stopPropagation()">▶ Drive</a>
+        </div>
+        <div class="session-row reveal" style="cursor:default; opacity:0.5;">
+          <div class="session-num" style="color:var(--muted);">04</div>
+          <div class="session-info">
+            <div class="session-title">SESIÓN 4 — Próximamente</div>
+            <div class="session-meta">En preparación · Fecha TBD · ¡Atento al vermut!</div>
+            <div class="session-tags"><span class="session-tag">Próximo</span></div>
+          </div>
+          <span class="session-action" style="opacity:0.4;cursor:default;">⏳ Soon</span>
+        </div>
+      </div>
+      <div class="tb-section reveal">
+        <div class="r-title" style="margin-bottom:20px;">💾 ARCHIVO COMPLETO EN DRIVE<div class="r-title-line"></div></div>
+        <p style="font-size:var(--fs-sm);color:var(--muted);line-height:1.8;margin-bottom:20px;">Todas las sesiones grabadas de BRM_Bubatronik están disponibles en Google Drive. Sin anuncios, sin algoritmos, sin suscripciones — acceso libre para toda la manada.</p>
+        <a class="btn-stream primary" style="display:inline-block;padding:12px 28px;text-decoration:none;border-radius:6px;" href="https://drive.google.com/drive/folders/1XjSOxAVIAXA3R6qkOi3Uv_5rSdG5rLO0" target="_blank" rel="noopener">💾 ABRIR ARCHIVO DRIVE</a>
+      </div>
+    </div>
+
+    <!-- TAB: PROGRAMACIÓN -->
+    <div class="tab-panel" id="tab-programacion">
+      <div style="display:grid;grid-template-columns:1fr 380px;min-height:60vh;">
+        <div style="border-right:1px solid var(--border);">
+          <div class="sessions-header reveal"><div class="sessions-title">📅 PARRILLA BUBATRONIK</div></div>
+          <div style="padding:28px 36px;">
+            <div class="prog-grid">
+              <div class="prog-row vermut reveal">
+                <div><div class="prog-time">12:00</div><div class="prog-day">Domingos</div></div>
+                <div><div class="prog-name">☀️ VERMUT BUBATRONIK</div><div class="prog-desc">El ritual sagrado de la comunidad. Música de domingo — clásicos, funk, soul, buenas vibraciones y vermut obligatorio. En vivo desde Sant Salvador.</div><span class="prog-badge live">🔴 EN VIVO</span></div>
+              </div>
+              <div class="prog-row reveal">
+                <div><div class="prog-time">∞</div><div class="prog-day">Variable</div></div>
+                <div><div class="prog-name">🎛️ SESIONES NUMERADAS</div><div class="prog-desc">Sesiones largas (4–6h), multigenero, sin pausa. La Sesión 3 marcó el récord con 4.96 GB de música ininterrumpida. Ambiente real de barrio.</div><span class="prog-badge rec">🟢 GRABADO / DRIVE</span></div>
+              </div>
+              <div class="prog-row reveal">
+                <div><div class="prog-time">24/7</div><div class="prog-day">Siempre</div></div>
+                <div><div class="prog-name">📻 STREAM CONTINUO</div><div class="prog-desc">709+ tracks en rotación Open Format. Sin algoritmos que decidan por ti. Shoutcast 128kbps MP3 stereo via Cloudflare Worker proxy HTTPS.</div><span class="prog-badge live">🔴 CONTINUO</span></div>
+              </div>
+              <div class="prog-row reveal">
+                <div><div class="prog-time">TBD</div><div class="prog-day">Especial</div></div>
+                <div><div class="prog-name">🎉 FIESTAS DE LA MANADA</div><div class="prog-desc">Eventos especiales de comunidad y team building. Sesión en directo + ambiente colectivo. Para equipos reales que se unen por algo que les gusta.</div><span class="prog-badge rec">🟡 PRÓXIMO</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="padding:24px;background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);">
+          <div class="r-section" style="padding:0 0 22px 0;border-bottom:1px solid var(--border);margin-bottom:22px;">
+            <div class="r-title">☀️ PRÓXIMO VERMUT<div class="r-title-line"></div></div>
+            <div style="background:var(--bg3);border:1px solid var(--amber4);border-radius:8px;padding:16px;text-align:center;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--amber);letter-spacing:2px;">DOMINGO</div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;">12:00h · Sant Salvador</div>
+              <div style="font-size:var(--fs-xs);color:var(--muted2);margin-top:10px;line-height:1.6;">Abre el stream · Sirve el vermut · Disfruta. Sin excusas, sin algoritmos.</div>
+            </div>
+          </div>
+          <div class="r-section" style="padding:0;">
+            <div class="r-title">📻 GÉNEROS DEL VERMUT<div class="r-title-line"></div></div>
+            <div class="genre-tags" style="margin-top:4px;">
+              <span class="genre-tag hot">Clásicos</span><span class="genre-tag hot">Funk</span><span class="genre-tag hot">Soul</span>
+              <span class="genre-tag hot">Rock</span><span class="genre-tag">Jazz</span><span class="genre-tag">Blues</span>
+              <span class="genre-tag">Pop 80s</span><span class="genre-tag hot">Buena onda</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: LA MANADA -->
+    <div class="tab-panel" id="tab-manada">
+      <div style="display:grid;grid-template-columns:1fr 380px;min-height:60vh;">
+        <div style="border-right:1px solid var(--border);padding:36px 36px;">
+          <div class="tb-headline reveal">LA MANADA SALVAJE</div>
+          <div class="tb-sub reveal">Comunidad real · Sin etiquetas · Camp de Tarragona y el mundo</div>
+          <div class="manada-quote reveal" style="font-size:17px;margin-bottom:28px;border-left-width:4px;">"A sonreír y divertirse. Para tod@s los que gusten y quieran. A bombazo limpio, sin etiquetas, sin preocupaciones.<br><br>La música es el hilo conductor. El vermut de los domingos es el ritual. Las sesiones largas crean el vínculo.<br><br>¡AUUUAUUU! 🐺"</div>
+          <div class="tb-cards reveal">
+            <div class="tb-card"><span class="tb-icon">📍</span><div class="tb-card-title">Raíces en Sant Salvador</div><div class="tb-card-desc">Nacida en Sant Salvador (Tarragona, Catalunya), con vocación de comunidad real que conecta Camp de Tarragona con el resto del mundo sin perder la identidad local.</div></div>
+            <div class="tb-card"><span class="tb-icon">🎵</span><div class="tb-card-title">No es una radio de fondo</div><div class="tb-card-desc">Es un espacio vivo. La música no la decide ningún algoritmo — la decide la manada. Rock, funk, rap, soul, techno, afrobeats... lo que pida el momento.</div></div>
+            <div class="tb-card"><span class="tb-icon">☀️</span><div class="tb-card-title">El Vermut como ritual</div><div class="tb-card-desc">Cada domingo a las 12h, vermut obligatorio. No es opcional. Es el pegamento social que convierte el stream en comunidad real.</div></div>
+            <div class="tb-card"><span class="tb-icon">🌍</span><div class="tb-card-title">Local y Global</div><div class="tb-card-desc">Arraigo local en Tarragona, alcance global via stream. La manada extendida escucha desde cualquier parte del mundo, pero el corazón sigue en Sant Salvador.</div></div>
+          </div>
+          <div class="r-title" style="margin-top:32px;margin-bottom:16px;">🔗 ÚNETE A LA MANADA<div class="r-title-line"></div></div>
+          <div class="social-links">
+            <a class="social-link" href="https://www.instagram.com/bubatronik_brm/" target="_blank" rel="noopener"><span class="social-icon">📸</span> Instagram — Noticias y sesiones en directo<span class="social-arrow">→</span></a>
+            <a class="social-link" href="mailto:rubenrodriguez.f.93@gmail.com"><span class="social-icon">📧</span> Contacto directo con Rubén (BRM/DEVBU93)<span class="social-arrow">→</span></a>
+          </div>
+        </div>
+        <div style="padding:24px;background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);">
+          <div class="r-section" style="padding:0 0 22px 0;border-bottom:1px solid var(--border);margin-bottom:22px;">
+            <div class="r-title">🐺 NODO PRINCIPAL<div class="r-title-line"></div></div>
+            <div class="info-row"><span class="info-label">Creador</span><span class="info-val">Rubén · BRM / DEVBU93</span></div>
+            <div class="info-row"><span class="info-label">Sistema</span><span class="info-val">WORLD-MUNDO OS</span></div>
+            <div class="info-row"><span class="info-label">Nodo</span><span class="info-val">Lob@-Pulpo × ROCE SYNC</span></div>
+            <div class="info-row"><span class="info-label">Alias</span><span class="info-val">LOB@-PULPO · BUBA · DRDB</span></div>
+            <div class="info-row"><span class="info-label">Sede</span><span class="info-val">📍 Sant Salvador, Tarragona</span></div>
+          </div>
+          <div class="r-section" style="padding:0;margin-top:0;">
+            <div class="r-title">⚡ STACK TÉCNICO<div class="r-title-line"></div></div>
+            <div class="info-row"><span class="info-label">Stream</span><span class="info-val">Shoutcast · 128kbps</span></div>
+            <div class="info-row"><span class="info-label">Proxy</span><span class="info-val">Cloudflare Worker</span></div>
+            <div class="info-row"><span class="info-label">Web</span><span class="info-val">GitHub Pages</span></div>
+            <div class="info-row"><span class="info-label">Dominio</span><span class="info-val">brm.worldmos.world</span></div>
+            <div class="info-row"><span class="info-label">DNS</span><span class="info-val">GoDaddy CNAME</span></div>
+            <div class="info-row"><span class="info-label">Automatización</span><span class="info-val">GitHub Actions CI/CD</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: TEAM BUILDING -->
+    <div class="tab-panel" id="tab-teambuilding">
+      <div class="tb-section reveal">
+        <div class="tb-headline">TEAM BUILDING REAL</div>
+        <div class="tb-sub">La herramienta de cohesión que ninguna consultora puede replicar</div>
+        <p class="reveal" style="font-family:'Barlow Condensed',sans-serif;font-size:16px;color:var(--muted);line-height:1.8;max-width:700px;margin-bottom:32px;letter-spacing:0.5px;">BRM_Bubatronik no es un proveedor de team building al uso. Es un espacio vivo donde la música hace el trabajo que los PowerPoints jamás consiguieron: crear ambiente de equipo real, sin forzarlo, sin actividades vacías.</p>
+        <div class="tb-cards reveal">
+          <div class="tb-card"><span class="tb-icon">🎶</span><div class="tb-card-title">La música hace el trabajo</div><div class="tb-card-desc">Sesión en directo de 4–6h mientras el equipo trabaja, celebra o simplemente comparte tiempo. La gente se une por algo que le gusta, no por obligación corporativa.</div></div>
+          <div class="tb-card"><span class="tb-icon">🌍</span><div class="tb-card-title">Equipos dispersos geográficamente</div><div class="tb-card-desc">Ideal para empresas con equipos en múltiples países. El stream funciona como hilo conductor común que atraviesa fronteras sin billetes de avión.</div></div>
+          <div class="tb-card"><span class="tb-icon">🎉</span><div class="tb-card-title">Eventos de empresa que se recuerdan</div><div class="tb-card-desc">Fiesta de empresa con sesión BRM en directo = recuerdo real, no PowerPoint. La manada crea ambiente; la consultora solo lo cobra.</div></div>
+          <div class="tb-card"><span class="tb-icon">☀️</span><div class="tb-card-title">El Vermut como protocolo</div><div class="tb-card-desc">Domingo 12h, vermut obligatorio para el equipo, sesión en vivo. Es el ritual más sencillo y efectivo de cohesión que existe. Y sin consultora de por medio.</div></div>
+          <div class="tb-card"><span class="tb-icon">🎙️</span><div class="tb-card-title">Alternativa a lo vacío</div><div class="tb-card-desc">Kata Bowling, paintball, escape rooms — ya los ha visto todo el mundo. Una sesión de 6h de música real, en buena compañía, crea vínculos duraderos.</div></div>
+          <div class="tb-card"><span class="tb-icon">📧</span><div class="tb-card-title">Contacta para tu evento</div><div class="tb-card-desc">¿Tu empresa necesita cohesión real? Hablemos. Sesión en directo, vermut corporativo, o sesión grabada para vuestros eventos.</div></div>
+        </div>
+        <div style="margin-top:36px;padding:24px;background:var(--bg3);border:1px solid var(--amber4);border-radius:12px;max-width:600px;" class="reveal">
+          <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--white);margin-bottom:8px;">¿Quieres BRM en tu evento?</div>
+          <p style="font-size:var(--fs-sm);color:var(--muted);line-height:1.7;margin-bottom:16px;">Contacta directamente con Rubén para hablar de sesiones, eventos corporativos o colaboraciones con la manada.</p>
+          <a class="btn-stream primary" style="display:inline-block;text-decoration:none;padding:12px 28px;border-radius:6px;" href="mailto:rubenrodriguez.f.93@gmail.com">📧 CONTACTAR A RUBÉN</a>
+        </div>
+      </div>
+      <div style="padding:24px 36px 36px;border-top:1px solid var(--border);">
+        <div class="r-title" style="margin-bottom:12px;">⚖️ ASPECTOS LEGALES<div class="r-title-line"></div></div>
+        <p style="font-size:var(--fs-xs);color:var(--muted);line-height:1.8;max-width:700px;">
+          <strong style="color:var(--white);">Propiedad:</strong> Rubén — BRM_Bubatronik, marca registrable · WORLD-MUNDO OS.<br>
+          <strong style="color:var(--white);">Derechos musicales:</strong> Gestión SGAE/AGEDI para emisión legal en España; licencia de streaming según plataforma.<br>
+          <strong style="color:var(--white);">Datos oyentes:</strong> Mínimos, RGPD compliant, sin tracking agresivo.<br>
+          <strong style="color:var(--white);">Contenido propio (mezclas, sesiones):</strong> Derechos del DJ/creador protegidos.<br>
+          <strong style="color:var(--white);">Emisión:</strong> Radio online comunitaria y cultural — vocación de comunidad real, Camp de Tarragona.
+        </p>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div>
+        <div class="footer-brand">BUBATRONIK_BRM · Frecuencia Sant Salvador</div>
+        <div class="footer-legal">LOB@-PULPO × DEVBU93 · WorldMOS · WORLD-MUNDO OS</div>
+      </div>
+      <div class="footer-links">
+        <a class="footer-link" href="https://worldmos.world" target="_blank">WorldMOS</a>
+        <a class="footer-link" href="https://www.instagram.com/bubatronik_brm/" target="_blank">Instagram</a>
+        <a class="footer-link" href="https://drive.google.com/drive/folders/1XjSOxAVIAXA3R6qkOi3Uv_5rSdG5rLO0" target="_blank">Drive</a>
+        <a class="footer-link" href="mailto:rubenrodriguez.f.93@gmail.com">Email</a>
+      </div>
+      <div class="footer-copy">© 2026 · Sant Salvador, Tarragona, Catalunya, España<br>Radio comunitaria · SGAE/AGEDI · RGPD compliant · ¡AUUUAUUU! 🐺</div>
+    </footer>
+  </div>
+
+  <div class="kbd-hint"><kbd>Space</kbd> Play · <kbd>A</kbd><kbd>D</kbd> Tracks</div>
+
+  <script>
+  // ══════════════════════════════════════════════════════════════════════
+  //  BUBATRONIK_BRM RADIO · v2026.06 · FRECUENCIA SANT SALVADOR
+  //  Rubén Rodríguez Francisco · DEVBU93 · LOB@-Pulpo · ManadaSalvaje
+  //
+  //  CORRECCIONES v2026.06:
+  //  - <audio> sin <source> tags — src asignado dinámicamente en click
+  //  - togglePlay() asigna src ANTES de play() — fix crítico
+  //  - tryNextStream() con fallback real por cada URL
+  //  - Soporte de tracks "session" reproducibles directamente
+  //  - Indicador de modo (LIVE STREAM / SESIÓN / PARADO)
+  // ══════════════════════════════════════════════════════════════════════
+
+  // ── TRACKS DATABASE ──────────────────────────────────────────────────
+  // Las sesiones marcadas con audioSrc son reproducibles directamente.
+  // Los tracks del stream son solo metadata — suenan via radio en vivo.
+  // Para añadir más tracks reproducibles: copia el patrón de las sesiones
+  // y pon la URL directa del MP3 alojado en tu servidor/CDN.
+  const TRACKS = [
+    // ── SESIONES REPRODUCIBLES (tienen URL de audio) ──────────────────
+    {
+      n:'S3', t:'SESIÓN 3 — La Grande (Open Format · 6h)',
+      artist:'BRM · Sant Salvador · 2026', genre:'open format',
+      audioSrc:'https://drive.google.com/uc?export=download&id=1SopFdy3rmWlxUunYdfvJz0kyrXDcO2jN',
+      isSession: true, sessionLabel:'SESIÓN COMPLETA · 6h'
+    },
+    // ── TRACKS EN ROTACIÓN (suenan via stream en vivo) ────────────────
+    {n:'★', t:'Carlos Vecino — Tema especial BRM Radio',     artist:'Carlos Vecino',      genre:'folk'},
+    {n:'200',t:'Xican — Nueva Tierra',                        artist:'Xican',              genre:'electronic'},
+    {n:'199',t:'Pop Smoke ft. Khaligraph Jones — SHWATY',     artist:'Pop Smoke',          genre:'hip hop'},
+    {n:'198',t:'ZHU — One Minute To Midnight',                artist:'ZHU',                genre:'deep house'},
+    {n:'197',t:'G-HUN — BABA YAGA',                          artist:'G-HUN',              genre:'techno'},
+    {n:'196',t:'In Da Club — Old Soul Version (1950s)',        artist:'50 Cent Cover',      genre:'soul'},
+    {n:'195',t:'BOVSKI, PET3RPUNX — SCARS',                   artist:'BOVSKI & Co.',       genre:'techno'},
+    {n:'194',t:'EMMY — Dancing All Alone (BOVSKI Remix)',      artist:'EMMY',               genre:'electronic'},
+    {n:'193',t:'WILD',                                        artist:'Desconocido',        genre:'electronic'},
+    {n:'192',t:'Vive Hoy — Pop Emocional',                    artist:'Pop Emocional AI',   genre:'soul'},
+    {n:'191',t:'Marwán & Nach — 5 Gramos de Resentimiento',   artist:'Marwán · Nach',      genre:'hip hop'},
+    {n:'190',t:'BLAKE ft. Al2 El Aldeano — GOD SCHOOL',       artist:'BLAKE · Al2',        genre:'hip hop'},
+    {n:'189',t:'Madre — Soul Emocional',                      artist:'Soul AI',            genre:'soul'},
+    {n:'188',t:'Antoine Clamaran — Gold',                     artist:'Antoine Clamaran',   genre:'deep house'},
+    {n:'187',t:'Avicii — For A Better Day',                   artist:'Avicii',             genre:'electronic'},
+    {n:'186',t:'Fritz & Paul Kalkbrenner — Sky and Sand',     artist:'Fritz & Paul K',     genre:'electronic'},
+    {n:'185',t:'Robin Schulz — Sugar ft. Francesco Yates',    artist:'Robin Schulz',       genre:'deep house'},
+    {n:'184',t:'DJs From Mars — Avicii Tribute Megamashup',   artist:'DJs From Mars',      genre:'electronic'},
+    {n:'183',t:'KASE.O — SALUD Y LIBERTAD ft. FOYONE',        artist:'KASE.O · FOYONE',    genre:'rap'},
+    {n:'182',t:'SHO-HAI — TE PONE BIEN con KASE.O',           artist:'SHO-HAI · KASE.O',   genre:'rap'},
+    {n:'181',t:'Fito & Fitipaldis — Quiero gritar',           artist:'Fito & Fitipaldis',  genre:'rock'},
+    {n:'180',t:'Billy Gibbons — La Grange',                   artist:'Billy Gibbons',      genre:'rock'},
+    {n:'179',t:'Eiffel 65 — Blue (Da Ba Dee)',                artist:'Eiffel 65',          genre:'eurodance'},
+    {n:'178',t:'Culture Beat — Mr. Vain',                     artist:'Culture Beat',       genre:'eurodance'},
+    {n:'177',t:'Snap! — Rhythm is a Dancer',                  artist:'Snap!',              genre:'eurodance'},
+    {n:'176',t:'Rnbstylerz — Like Wooh Wooh (Remix)',         artist:'Rnbstylerz',         genre:'electronic'},
+    {n:'175',t:'Solitario — Barra libre de barras',           artist:'Solitario',          genre:'rap'},
+    {n:'174',t:'Mägo de Oz — Hasta Que El Cuerpo Aguante',   artist:'Mägo de Oz',         genre:'rock'},
+    {n:'173',t:'El Vals del Obrero',                          artist:'Anónimo',            genre:'folk'},
+    {n:'172',t:'Paseo',                                       artist:'Desconocido',        genre:'electronic'},
+    {n:'171',t:'Fito & Fitipaldis — La casa por el tejado',   artist:'Fito & Fitipaldis',  genre:'rock'},
+    {n:'170',t:'Matador — Los Fabulosos Cadillacs',           artist:'Los Fabulosos Cadillacs',genre:'rock'},
+    {n:'169',t:'Hablaron de mí — Woundsmusic',               artist:'Woundsmusic',        genre:'soul'},
+    {n:'168',t:'Lo Aprendí de Tu Frío — Soul',               artist:'Soul AI',            genre:'soul'},
+    {n:'167',t:'PAPÁ — Loba Negra',                          artist:'Loba Negra',         genre:'soul'},
+    {n:'166',t:'NO ES PARA MENTES PEQUEÑAS — BLUES',         artist:'Blues Oscuro AI',    genre:'blues'},
+    {n:'165',t:'TOTEKING — Ni de Ellos ni de Ellas',         artist:'TOTEKING',           genre:'rap'},
+    {n:'164',t:'KASE.O & CAPAZ — Pan caliente',              artist:'KASE.O · CAPAZ',     genre:'rap'},
+    {n:'163',t:'SFDK — Esclavos (Neo Soul Cover)',            artist:'SFDK',               genre:'neo soul'},
+    {n:'162',t:'Macaco — Atreverse a Vivir',                 artist:'Macaco',             genre:'folk'},
+    {n:'161',t:"Mina's Radio — EP. 003",                     artist:"Mina's Radio",       genre:'deep house'},
+    {n:'160',t:'Vengaboys — Boom Boom Boom!! (Hardstyle)',   artist:'Vengaboys',          genre:'hardstyle'},
+    {n:'159',t:'TRIFUNOX — TIKI TIKI (TOP CAR MIX)',         artist:'TRIFUNOX',           genre:'electronic'},
+    {n:'158',t:'Reel 2 Real — I Like To Move It (REMIX)',    artist:'Reel 2 Real',        genre:'eurodance'},
+    {n:'157',t:'KULTØ — Darbuka Pulse (Drum Tribal)',        artist:'KULTØ',              genre:'afro'},
+    {n:'156',t:"Mr. Lonely — 1950's Soul Version",           artist:'Old Soul AI',        genre:'soul'},
+    {n:'155',t:'Wu Tang Clan — Protect Ya Neck / C.R.E.A.M.',artist:'Wu Tang Clan',       genre:'hip hop'},
+    {n:'154',t:'Black Pumas — Colors (Live Abbey Road)',      artist:'Black Pumas',        genre:'neo soul'},
+    {n:'153',t:'FKJ & Masego — Tadow',                       artist:'FKJ · Masego',       genre:'neo soul'},
+    {n:'152',t:'Delinquent Habits — CALIFORNIA',             artist:'Delinquent Habits',  genre:'hip hop'},
+    {n:'151',t:'Kendrick Lamar — HUMBLE.',                   artist:'Kendrick Lamar',     genre:'hip hop'},
+    {n:'150',t:'J Dilla — Donuts (Medley)',                  artist:'J Dilla',            genre:'hip hop'},
+    {n:'149',t:'Massive Attack — Teardrop',                  artist:'Massive Attack',     genre:'electronic'},
+    {n:'148',t:'Portishead — Glory Box',                     artist:'Portishead',         genre:'electronic'},
+    {n:'147',t:'Bonobo — Kong',                              artist:'Bonobo',             genre:'electronic'},
+    {n:'146',t:'Moderat — Bad Kingdom',                      artist:'Moderat',            genre:'electronic'},
+    {n:'145',t:"Trentemøller — Miss You",                    artist:'Trentemøller',       genre:'electronic'},
+    {n:'144',t:'Aphex Twin — Avril 14th',                    artist:'Aphex Twin',         genre:'electronic'},
+    {n:'143',t:'Four Tet — Angel Echoes',                    artist:'Four Tet',           genre:'electronic'},
+    {n:'142',t:'DJ Shadow — Midnight in a Perfect World',    artist:'DJ Shadow',          genre:'hip hop'},
+    {n:'141',t:'MF DOOM — Madvillainy Medley',               artist:'Madvillain',         genre:'hip hop'},
+    {n:'140',t:'The Roots — You Got Me',                     artist:'The Roots',          genre:'hip hop'},
+    {n:'139',t:'Erykah Badu — On & On',                     artist:'Erykah Badu',        genre:'neo soul'},
+    {n:'138',t:"D'Angelo — Untitled (How Does It Feel)",     artist:"D'Angelo",           genre:'neo soul'},
+    {n:'137',t:'Lauryn Hill — Ex-Factor',                    artist:'Lauryn Hill',        genre:'neo soul'},
+    {n:'136',t:'Outkast — Rosa Parks',                       artist:'Outkast',            genre:'hip hop'},
+    {n:'135',t:'Amy Winehouse — Back to Black',              artist:'Amy Winehouse',      genre:'soul'},
+    {n:'134',t:'Sharon Jones — 100 Days 100 Nights',         artist:'Sharon Jones',       genre:'soul'},
+    {n:'133',t:'Charles Bradley — Changes',                  artist:'Charles Bradley',    genre:'soul'},
+    {n:'132',t:'Leon Bridges — Coming Home',                 artist:'Leon Bridges',       genre:'soul'},
+    {n:'131',t:'Gary Clark Jr. — Bright Lights',             artist:'Gary Clark Jr.',     genre:'blues'},
+    {n:'130',t:'Jack White — Ball and Biscuit',              artist:'Jack White',         genre:'blues'},
+    {n:'129',t:'Alabama Shakes — Hold On',                   artist:'Alabama Shakes',     genre:'rock'},
+    {n:'128',t:'Rodrigo y Gabriela — Tamacun',               artist:'Rodrigo y Gabriela', genre:'folk'},
+    {n:'127',t:'Orishas — A Lo Cubano',                      artist:'Orishas',            genre:'afro'},
+    {n:'126',t:'Buena Vista Social Club — Chan Chan',         artist:'Buena Vista Social Club',genre:'folk'},
+    {n:'125',t:'Ibrahim Maalouf — Illusions',                artist:'Ibrahim Maalouf',    genre:'afro'},
+    {n:'124',t:'Aya Nakamura — Djadja',                      artist:'Aya Nakamura',       genre:'afro'},
+    {n:'123',t:'Burna Boy — Last Last',                      artist:'Burna Boy',          genre:'afro'},
+    {n:'122',t:'Wizkid — Ojuelegba',                         artist:'Wizkid',             genre:'afro'},
+    {n:'121',t:'Afrobeats Compilation BRM Mix Vol.1',         artist:'BRM Selección',      genre:'afro'},
+    {n:'120',t:'Disclosure — Latch ft. Sam Smith',            artist:'Disclosure',         genre:'deep house'},
+    {n:'119',t:'Bicep — Glue',                               artist:'Bicep',              genre:'deep house'},
+    {n:'118',t:'Peggy Gou — (It Goes Like) Nanana',          artist:'Peggy Gou',          genre:'deep house'},
+    {n:'117',t:'Jamie xx — Gosh',                            artist:'Jamie xx',           genre:'deep house'},
+    {n:'116',t:'Joy Orbison — Hyph Mngo',                    artist:'Joy Orbison',        genre:'deep house'},
+    {n:'115',t:'Solomun — Velo',                             artist:'Solomun',            genre:'deep house'},
+    {n:'114',t:'Tale Of Us — Numb',                          artist:'Tale Of Us',         genre:'techno'},
+    {n:'113',t:'Charlotte de Witte — Doppler',               artist:'Charlotte de Witte', genre:'techno'},
+    {n:'112',t:'Amelie Lens — Forever',                      artist:'Amelie Lens',        genre:'techno'},
+    {n:'111',t:'SPFDJ — 1210',                               artist:'SPFDJ',              genre:'techno'},
+    {n:'110',t:'Objekt — Ganzfeld',                          artist:'Objekt',             genre:'techno'},
+    {n:'109',t:'Surgeon — Magneze',                          artist:'Surgeon',            genre:'techno'},
+    {n:'108',t:'Jeff Mills — The Bells',                     artist:'Jeff Mills',         genre:'techno'},
+    {n:'107',t:'Underground Resistance — Seawolf',           artist:'Underground Resistance',genre:'techno'},
+    {n:'106',t:'Plastikman — Spastik',                       artist:'Plastikman',         genre:'techno'},
+    {n:'105',t:'Richie Hawtin — Contakt (Live)',              artist:'Richie Hawtin',      genre:'techno'},
+    {n:'104',t:'Ben Klock — Subzero',                        artist:'Ben Klock',          genre:'techno'},
+    {n:'103',t:'Marcel Dettmann — Track 8',                  artist:'Marcel Dettmann',    genre:'techno'},
+    {n:'+ 506',t:'... 506 tracks más en la colección BRM',   artist:'BUBATRONIK COLLECTION · DRIVE → 709 TOTAL',genre:''},
+  ];
+
+  // ── STREAM URLS (fallback chain) ─────────────────────────────────────
+  const STREAM_URLS = [
+    'https://brm.rubenrodriguez-f-93.workers.dev/stream',
+    'https://brm.rubenrodriguez-f-93.workers.dev/',
+    'https://bubatronik.radiostream321.com/;stream.mp3',
+    'https://bubatronik.radiostream321.com/stream',
+  ];
+
+  // ── STATE ─────────────────────────────────────────────────────────────
+  let currentIdx    = 0;
+  let isPlaying     = false;
+  let isSessionMode = false;  // true = reproduciendo sesión, false = stream live
+  let streamAttempt = 0;
+  let audioCtx = null, analyser = null, sourceNode = null, rafId = null;
+  let activeGenre = '', searchQuery = '', filteredTracks = [...TRACKS];
+
+  const audio     = document.getElementById('audioPlayer');
+  const btnPlay   = document.getElementById('btnPlay');
+  const npTitle   = document.getElementById('npTitle');
+  const npArtist  = document.getElementById('npArtist');
+  const volSlider = document.getElementById('volSlider');
+  const volLabel  = document.getElementById('volLabel');
+  const canvas    = document.getElementById('vizCanvas');
+  const ctx2d     = canvas.getContext('2d');
+  const modeDot   = document.getElementById('modeDot');
+  const modeText  = document.getElementById('modeText');
+
+  // Restore volume
+  const savedVol = localStorage.getItem('brm_volume');
+  if (savedVol !== null) {
+    audio.volume = parseFloat(savedVol);
+    volSlider.value = savedVol;
+    volLabel.textContent = Math.round(parseFloat(savedVol) * 100) + '%';
+  } else { audio.volume = 0.8; }
+
+  // ── MODE INDICATOR ────────────────────────────────────────────────────
+  function setModeIndicator(mode) {
+    modeDot.className = 'mode-dot';
+    if (mode === 'live') {
+      modeDot.classList.add('live');
+      modeText.textContent = 'LIVE STREAM · BUBATRONIK_BRM';
+    } else if (mode === 'session') {
+      modeDot.classList.add('session');
+      modeText.textContent = 'REPRODUCIENDO SESIÓN';
+    } else {
+      modeText.textContent = 'EN ESPERA — PULSA PLAY';
+    }
+  }
+
+  // ── TICKER ────────────────────────────────────────────────────────────
+  function initTicker() {
+    const text = '🎵 BUBATRONIK_BRM · FRECUENCIA SANT SALVADOR · OPEN FORMAT RADIO · LIVE 24/7 · VERMUT DOMINICAL CADA DOMINGO 12H · 709+ TRACKS EN COLECCIÓN · WORLDMOS · AGUAFLOW · DPNGAME · LA MANADA SALVAJE · ¡AUUUAUUU! 🐺 · ';
+    const full = text.repeat(5);
+    const track = document.getElementById('tickerTrack');
+    track.innerHTML = '<span>' + full + '</span><span>' + full + '</span>';
+  }
+
+  // ── CLOCK ─────────────────────────────────────────────────────────────
+  function initClock() {
+    function tick() {
+      const now = new Date();
+      const pad = n => String(n).padStart(2,'0');
+      document.getElementById('clock').textContent =
+        `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())} · ${pad(now.getDate())}/${pad(now.getMonth()+1)}/${now.getFullYear()}`;
+    }
+    tick(); setInterval(tick, 1000);
+  }
+
+  // ── EQ BARS ───────────────────────────────────────────────────────────
+  function buildEqBars() {
+    const c = document.getElementById('eqBars');
+    [18,28,40,36,24,40,32,16,36,40,28,20,36,28,40,24,32,40,18,36,28,40,32,16,24,40,36,20,28,40].forEach(h => {
+      const b = document.createElement('div');
+      b.className = 'eq-bar'; b.style.height = h + 'px';
+      c.appendChild(b);
+    });
+  }
+
+  // ── CANVAS VIZ ────────────────────────────────────────────────────────
+  function resizeCanvas() {
+    const r = canvas.getBoundingClientRect();
+    canvas.width  = r.width  * (window.devicePixelRatio || 1);
+    canvas.height = r.height * (window.devicePixelRatio || 1);
+    ctx2d.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+  }
+
+  function initAudioCtx() {
+    if (audioCtx) return;
+    try {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 128; analyser.smoothingTimeConstant = 0.75;
+      sourceNode = audioCtx.createMediaElementSource(audio);
+      sourceNode.connect(analyser); analyser.connect(audioCtx.destination);
+    } catch(e) { console.warn('Web Audio API no disponible'); }
+  }
+
+  function drawViz() {
+    const w = canvas.getBoundingClientRect().width;
+    const h = canvas.getBoundingClientRect().height;
+    ctx2d.clearRect(0, 0, w, h);
+    if (!analyser) { drawStaticBars(w,h); rafId = requestAnimationFrame(drawViz); return; }
+    const bufLen = analyser.frequencyBinCount;
+    const data   = new Uint8Array(bufLen);
+    analyser.getByteFrequencyData(data);
+    const barW = (w / bufLen) * 2.5;
+    let x = 0;
+    for (let i = 0; i < bufLen; i++) {
+      const v = data[i] / 255;
+      const barH = v * h * 0.85;
+      ctx2d.fillStyle = (i / bufLen) < 0.5 ? '#f59e0b' : '#fbbf24';
+      ctx2d.globalAlpha = isPlaying ? (0.5 + v * 0.5) : 0.2;
+      ctx2d.fillRect(x, h - barH, barW - 1, barH);
+      if (v > 0.5 && isPlaying) {
+        ctx2d.globalAlpha = v * 0.4;
+        ctx2d.fillStyle = '#fde68a';
+        ctx2d.fillRect(x, h - barH - 2, barW - 1, 2);
+      }
+      x += barW + 1;
+    }
+    ctx2d.globalAlpha = 1;
+    rafId = requestAnimationFrame(drawViz);
+  }
+
+  function drawStaticBars(w, h) {
+    const count = 40; const barW = (w / count) - 1;
+    ctx2d.fillStyle = '#f59e0b';
+    for (let i = 0; i < count; i++) {
+      const barH = isPlaying
+        ? (Math.sin(Date.now() / 400 + i * 0.5) * 0.4 + 0.6) * h * 0.3
+        : h * 0.04;
+      ctx2d.globalAlpha = isPlaying ? 0.4 : 0.15;
+      ctx2d.fillRect(i * (barW + 1), h - barH, barW, barH);
+    }
+    ctx2d.globalAlpha = 1;
+  }
+
+  // ── PLAYLIST ──────────────────────────────────────────────────────────
+  function filterTracks() {
+    const q = searchQuery.toLowerCase();
+    filteredTracks = TRACKS.filter(t => {
+      const ms = !q || t.t.toLowerCase().includes(q) || t.artist.toLowerCase().includes(q);
+      const mg = !activeGenre || (t.genre || '').toLowerCase().includes(activeGenre);
+      return ms && mg;
+    });
+  }
+
+  function renderPlaylist() {
+    const scroll = document.getElementById('playlistScroll');
+    filterTracks();
+    scroll.innerHTML = '';
+    filteredTracks.forEach((track, idx) => {
+      const row = document.createElement('div');
+      const isActive = idx === currentIdx;
+      let classes = 'track-row' + (isActive ? ' active' : '');
+      if (track.isSession) classes += ' session-track';
+      row.className = classes;
+
+      const extraInfo = track.isSession
+        ? `<span class="playable-badge">▶ REPRODUCIBLE</span>`
+        : '';
+
+      row.innerHTML = `
+        <div class="track-num">${track.n}</div>
+        <div class="track-info">
+          <div class="track-title" title="${track.t}">${track.t}</div>
+          <div class="track-artist">${track.artist}${extraInfo}</div>
+        </div>
+        <div class="track-icon">${isActive ? '♫' : (track.isSession ? '▶' : '·')}</div>`;
+
+      row.addEventListener('click', () => selectTrack(idx));
+      scroll.appendChild(row);
+    });
+    document.getElementById('trackBadge').textContent =
+      (filteredTracks.length === TRACKS.length ? '709' : filteredTracks.length) + ' TRACKS';
+  }
+
+  // ── SELECT TRACK ─────────────────────────────────────────────────────
+  // Si el track tiene audioSrc → lo reproduce directamente.
+  // Si no → conecta al stream live (radio).
+  function selectTrack(idx) {
+    currentIdx = idx;
+    const track = filteredTracks[idx];
+    if (!track) return;
+
+    // Actualizar Now Playing
+    npTitle.style.opacity = '0'; npArtist.style.opacity = '0';
+    setTimeout(() => {
+      npTitle.textContent  = track.t;
+      npArtist.textContent = track.artist;
+      npTitle.style.opacity = '1'; npArtist.style.opacity = '1';
+    }, 200);
+
+    renderPlaylist();
+    updateMediaSession(track);
+
+    if (track.isSession && track.audioSrc) {
+      // ── MODO SESIÓN: reproducir el archivo de audio directamente
+      isSessionMode = true;
+      audio.pause();
+      audio.src = track.audioSrc;
+      audio.load();
+      audio.play()
+        .then(() => {
+          toast('▶ Reproduciendo: ' + track.t.substring(0, 40));
+          setModeIndicator('session');
+        })
+        .catch(err => {
+          console.error('Session playback error:', err);
+          toast('⚠️ No se puede reproducir — abriendo en Drive...');
+          window.open('https://drive.google.com/file/d/1SopFdy3rmWlxUunYdfvJz0kyrXDcO2jN/view', '_blank');
+        });
+    } else {
+      // ── MODO STREAM: si ya está sonando el stream, solo actualizar display
+      if (isPlaying && !isSessionMode) {
+        toast('♫ ' + track.t.substring(0, 42));
+      } else {
+        // Arrancar el stream
+        isSessionMode = false;
+        startLiveStream();
+      }
+    }
+  }
+
+  // ── STREAM PLAYER ────────────────────────────────────────────────────
+  function startLiveStream() {
+    streamAttempt = 0;
+    audio.pause();
+    audio.src = STREAM_URLS[0] + '?t=' + Date.now();
+    audio.load();
+    audio.play().catch(() => tryNextStream());
+  }
+
+  function tryNextStream() {
+    streamAttempt++;
+    if (streamAttempt < STREAM_URLS.length) {
+      toast('🔄 Probando stream ' + (streamAttempt + 1) + '/' + STREAM_URLS.length + '...');
+      audio.src = STREAM_URLS[streamAttempt] + '?t=' + Date.now();
+      audio.load();
+      audio.play().catch(() => tryNextStream());
+    } else {
+      toast('⚠️ Stream offline — abriendo player nativo...');
+      setOffline();
+      setTimeout(openNativePlayer, 2000);
+      streamAttempt = 0;
+    }
+  }
+
+  // ── TOGGLE PLAY ───────────────────────────────────────────────────────
+  async function togglePlay() {
+    if (!audioCtx) initAudioCtx();
+    if (audioCtx && audioCtx.state === 'suspended') await audioCtx.resume();
+
+    if (isPlaying) {
+      audio.pause();
+      audio.src = '';
+      streamAttempt = 0;
+      isSessionMode = false;
+      setModeIndicator('idle');
+    } else {
+      const track = filteredTracks[currentIdx];
+      if (track && track.isSession && track.audioSrc) {
+        // Sesión seleccionada → reproducir sesión
+        isSessionMode = true;
+        audio.src = track.audioSrc;
+        audio.load();
+        audio.play()
+          .then(() => setModeIndicator('session'))
+          .catch(() => { toast('⚠️ Error — abriendo en Drive...'); openNativePlayer(); });
+      } else {
+        // Stream en vivo
+        isSessionMode = false;
+        startLiveStream();
+      }
+    }
+  }
+
+  // ── AUDIO EVENTS ──────────────────────────────────────────────────────
+  audio.addEventListener('play', () => {
+    isPlaying = true;
+    btnPlay.textContent = '⏸';
+    btnPlay.classList.add('is-playing');
+    document.body.classList.add('is-playing-body');
+    if (!rafId) drawViz();
+    if (!isSessionMode) {
+      toast('▶ Conectado · BUBATRONIK_BRM · Frecuencia Sant Salvador');
+      setModeIndicator('live');
+    }
+  });
+
+  audio.addEventListener('pause', () => {
+    isPlaying = false;
+    btnPlay.textContent = '▶';
+    btnPlay.classList.remove('is-playing');
+    document.body.classList.remove('is-playing-body');
+  });
+
+  audio.addEventListener('ended', () => {
+    // Solo aplica a sesiones (el stream no termina)
+    isPlaying = false;
+    btnPlay.textContent = '▶';
+    btnPlay.classList.remove('is-playing');
+    document.body.classList.remove('is-playing-body');
+    setModeIndicator('idle');
+    toast('✓ Sesión finalizada');
+  });
+
+  audio.addEventListener('error', () => {
+    if (isSessionMode) {
+      toast('⚠️ Error reproduciendo sesión — abriendo en Drive...');
+      setTimeout(() => window.open('https://drive.google.com/file/d/1SopFdy3rmWlxUunYdfvJz0kyrXDcO2jN/view', '_blank'), 800);
+    } else {
+      tryNextStream();
+    }
+  });
+
+  // ── BUTTONS ───────────────────────────────────────────────────────────
+  btnPlay.addEventListener('click', togglePlay);
+
+  document.getElementById('btnPrev').addEventListener('click', () => {
+    const prev = (currentIdx - 1 + filteredTracks.length) % filteredTracks.length;
+    selectTrack(prev);
+  });
+  document.getElementById('btnNext').addEventListener('click', () => {
+    const next = (currentIdx + 1) % filteredTracks.length;
+    selectTrack(next);
+  });
+
+  // ── VOLUME ────────────────────────────────────────────────────────────
+  volSlider.addEventListener('input', () => {
+    const v = parseFloat(volSlider.value);
+    audio.volume = v; volLabel.textContent = Math.round(v * 100) + '%';
+    localStorage.setItem('brm_volume', v);
+    document.querySelector('.vol-icon').textContent = v === 0 ? '🔇' : v < 0.4 ? '🔉' : '🔊';
+  });
+
+  // ── SEARCH ────────────────────────────────────────────────────────────
+  document.getElementById('searchInput').addEventListener('input', e => {
+    searchQuery = e.target.value; currentIdx = 0; renderPlaylist();
+  });
+
+  // ── GENRE FILTER ──────────────────────────────────────────────────────
+  document.getElementById('genreTags').addEventListener('click', e => {
+    const tag = e.target.closest('.genre-tag'); if (!tag) return;
+    const genre = tag.dataset.genre;
+    document.querySelectorAll('.genre-tag').forEach(t => t.classList.remove('active'));
+    activeGenre = activeGenre === genre ? '' : genre;
+    if (activeGenre) tag.classList.add('active');
+    currentIdx = 0; renderPlaylist();
+    toast('🎵 Filtro: ' + (activeGenre || 'Todos los géneros'));
+  });
+
+  // ── STREAM STATUS ─────────────────────────────────────────────────────
+  function setOnline(listeners) {
+    document.querySelector('html').dataset.status = 'online';
+    document.getElementById('statusText').textContent = 'EN VIVO ✓';
+    document.getElementById('onairInner').textContent = 'ON AIR';
+    document.getElementById('onairLabel').textContent = '▶ EMITIENDO EN VIVO';
+    document.getElementById('listenerCount').textContent = listeners ?? '---';
+    document.getElementById('freqListeners').textContent = '● OYENTES: ' + (listeners ?? '---');
+  }
+  function setOffline() {
+    document.querySelector('html').dataset.status = 'offline';
+    document.getElementById('statusText').textContent = 'OFFLINE';
+    document.getElementById('onairInner').textContent = 'OFF';
+    document.getElementById('onairLabel').textContent = '⏸ NO EMITIENDO';
+    document.getElementById('listenerCount').textContent = '0';
+    document.getElementById('freqListeners').textContent = '● OYENTES: 0';
+  }
+  function checkStatus() {
+    fetch('https://brm.rubenrodriguez-f-93.workers.dev/health', {cache:'no-store'})
+      .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+      .then(d => d.status === 'ok' ? setOnline(d.listeners ?? null) : setOffline())
+      .catch(() =>
+        fetch('https://brm.rubenrodriguez-f-93.workers.dev/', {method:'HEAD', mode:'no-cors', cache:'no-store'})
+          .then(() => setOnline(null)).catch(() => setOffline())
+      );
+  }
+
+  // ── MEDIA SESSION ────────────────────────────────────────────────────
+  function updateMediaSession(track) {
+    if (!('mediaSession' in navigator)) return;
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: track.t, artist: track.artist,
+      album: 'BUBATRONIK_BRM · Frecuencia Sant Salvador',
+      artwork: [{src:'https://drive.google.com/uc?export=view&id=1SopFdy3rmWlxUunYdfvJz0kyrXDcO2jN',sizes:'512x512',type:'image/jpeg'}]
+    });
+  }
+  function initMediaSession() {
+    if (!('mediaSession' in navigator)) return;
+    navigator.mediaSession.setActionHandler('play', () => togglePlay());
+    navigator.mediaSession.setActionHandler('pause', () => togglePlay());
+    navigator.mediaSession.setActionHandler('previoustrack', () => document.getElementById('btnPrev').click());
+    navigator.mediaSession.setActionHandler('nexttrack', () => document.getElementById('btnNext').click());
+  }
+
+  // ── SHARE & NATIVE ────────────────────────────────────────────────────
+  async function shareRadio() {
+    const data = {
+      title: 'BUBATRONIK_BRM · Frecuencia Sant Salvador 🛰️',
+      text:  '¡Escucha BRM Radio en directo! Open Format 24/7 desde Sant Salvador, Tarragona. ¡AUUUAUUU! 🐺',
+      url:   window.location.href
+    };
+    if (navigator.share) {
+      try { await navigator.share(data); } catch(e) { if (e.name !== 'AbortError') copyToClipboard(); }
+    } else { copyToClipboard(); }
+  }
+  function copyToClipboard() {
+    navigator.clipboard.writeText(window.location.href)
+      .then(() => toast('🔗 URL copiada al portapapeles'))
+      .catch(() => toast('🔗 brm.worldmos.world'));
+  }
+  function openNativePlayer() { window.open('https://bubatronik.radiostream321.com/', '_blank', 'noopener'); }
+  function openSession(url) { window.open(url, '_blank', 'noopener'); }
+
+  // ── TOAST ─────────────────────────────────────────────────────────────
+  function toast(msg, duration = 3500) {
+    const wrap = document.getElementById('toastWrap');
+    const el = document.createElement('div');
+    el.className = 'toast'; el.textContent = msg;
+    wrap.appendChild(el);
+    setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 400); }, duration);
+  }
+
+  // ── TAB NAVIGATION ────────────────────────────────────────────────────
+  document.querySelectorAll('.nav-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const id = tab.dataset.tab;
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const panel = document.getElementById('tab-' + id);
+      if (panel) { panel.classList.add('active'); triggerReveal(panel); }
+    });
+  });
+
+  // ── REVEAL OBSERVER ───────────────────────────────────────────────────
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+
+  function triggerReveal(scope) {
+    (scope || document).querySelectorAll('.reveal:not(.visible)').forEach(el => revealObserver.observe(el));
+  }
+
+  // ── KEYBOARD SHORTCUTS ────────────────────────────────────────────────
+  document.addEventListener('keydown', e => {
+    if (e.target.tagName === 'INPUT') return;
+    if (e.code === 'Space') { e.preventDefault(); togglePlay(); }
+    if (e.code === 'KeyA' || e.code === 'ArrowLeft') document.getElementById('btnPrev').click();
+    if (e.code === 'KeyD' || e.code === 'ArrowRight') document.getElementById('btnNext').click();
+  });
+
+  // ── TRANSITIONS ───────────────────────────────────────────────────────
+  npTitle.style.transition  = 'opacity 0.2s ease';
+  npArtist.style.transition = 'opacity 0.2s ease';
+
+  // ── INIT ──────────────────────────────────────────────────────────────
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+  initTicker();
+  initClock();
+  buildEqBars();
+  renderPlaylist();
+  initMediaSession();
+  triggerReveal();
+  setModeIndicator('idle');
+  checkStatus();
+  setInterval(checkStatus, 30000);
+  drawViz();
+
+  setTimeout(() => toast('📻 BUBATRONIK_BRM · Frecuencia Sant Salvador · Pulsa ▶ para escuchar'), 900);
+  </script>
+</body>
+</html>
