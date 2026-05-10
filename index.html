@@ -1519,11 +1519,11 @@
     document.getElementById('freqListeners').textContent = '● OYENTES: 0';
   }
   function checkStatus() {
-    fetch('https://brm.rubenrodriguez-f-93.workers.dev/health', {cache:'no-store'})
+    fetch('http://uk3freenew.listen2myradio.com:14387/index.html', {cache:'no-store'})
       .then(r => { if (!r.ok) throw new Error(); return r.json(); })
       .then(d => d.status === 'ok' ? setOnline(d.listeners ?? null) : setOffline())
       .catch(() =>
-        fetch('https://brm.rubenrodriguez-f-93.workers.dev/', {method:'HEAD', mode:'no-cors', cache:'no-store'})
+        fetch('http://uk3freenew.listen2myradio.com:14387', {method:'index', mode:'no-cors', cache:'no-store'})
           .then(() => setOnline(null)).catch(() => setOffline())
       );
   }
