@@ -1543,15 +1543,6 @@
     document.getElementById('listenerCount').textContent = '0';
     document.getElementById('freqListeners').textContent = '● OYENTES: 0';
   }
-  function checkStatus() {
-    fetch('https://brm.rubenrodriguez-f-93.workers.dev/health', {cache:'store'})
-      .then(r => { if (!r.ok) throw new Error(); return r.json(); })
-      .then(d => d.status === 'ok' ? setOnline(d.listeners ?? null) : setOffline())
-      .catch(() =>
-          fetch('https://brm.rubenrodriguez-f-93.workers.dev/', {method:'HEAD', mode:'cors',credentials: 'include', cache:'store'})
-          .then(() => setOnline(null)).catch(() => setOffline())
-      );
-  }
 
   // ── MEDIA SESSION ────────────────────────────────────────────────────
   function updateMediaSession(track) {
@@ -1660,7 +1651,8 @@ function checkStatus() {
         // Actualizar campos de r-section si existen
         _updateRSection(d);
       } else {
-        setOffline();
+         fetch('https://brm.rubenrodriguez-f-93.workers.dev/', {method:'HEAD', mode:'cors',credentials: 'include', cache:'store'})
+          .then(() => setOnline(null)).catch(() => setOffline();
         _liveStatus = false;
       }
     })
