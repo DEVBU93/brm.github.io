@@ -1,7 +1,7 @@
 # BRM Stream Proxy — Cloudflare Worker Config
 # Rubén Rodríguez Francisco · DEVBU93 · ManadaSalvaje
 
-name       = "brm-stream-proxy"
+name = "brm"
 main       = "worker.js"
 compatibility_date = "2026-01-01"
 
