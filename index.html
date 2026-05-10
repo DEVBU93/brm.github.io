@@ -265,8 +265,8 @@
     .mode-dot.live { background: var(--red); animation: blink-dot 1.2s step-start infinite; }
     .mode-dot.session { background: var(--green); }
 
-    /* HIDDEN AUDIO */
-     #audioPlayer { display: none; }
+    /* HIDDEN AUDIO  - display: none; */
+     #audioPlayer {  }
 
     /* CONTROLS */
     .controls-row { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 16px; }
@@ -1416,7 +1416,7 @@
 
     if (isPlaying) {
       audio.pause();
-      audio.src = '';
+      audio.src = 'http://uk3freenew.listen2myradio.com:14387/listen.pls';
       streamAttempt = 0;
       isSessionMode = false;
       setModeIndicator('idle');
