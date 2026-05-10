@@ -1535,7 +1535,7 @@
       .then(r => { if (!r.ok) throw new Error(); return r.json(); })
       .then(d => d.status === 'ok' ? setOnline(d.listeners ?? null) : setOffline())
       .catch(() =>
-          fetch('https://brm.rubenrodriguez-f-93.workers.dev/', {method:'HEAD', mode:'cors', cache:'no-store'})
+          fetch('https://brm.rubenrodriguez-f-93.workers.dev/', {method:'HEAD', mode:'cors',credentials: 'include', cache:'no-store'})
           .then(() => setOnline(null)).catch(() => setOffline())
       );
   }
