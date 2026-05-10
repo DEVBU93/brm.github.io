@@ -1628,6 +1628,87 @@
   initMediaSession();
   triggerReveal();
   setModeIndicator('idle');
+// ── BRM LIVE STATUS v2 — usa /status y /nowplaying del worker ──
+const BRM_WORKER = 'https://brm.rubenrodriguez-f-93.workers.dev';
+let _liveStatus = false;
+let _npInterval = null;
+
+function checkStatus() {
+  fetch(BRM_WORKER + '/status', { cache: 'no-store' })
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(d => {
+      if (d.live) {
+        setOnline(d.listeners);
+        _liveStatus = true;
+        // Actualizar r-section con datos reales
+        const elEmision = document.getElementById('statusText');
+        if (elEmision) elEmision.innerHTML = '<span class="live-dot"></span> Verificando...';
+        const elBitrate = document.querySelector('.info-row .info-val[data-field="bitrate"]');
+        // Actualizar campos de r-section si existen
+        _updateRSection(d);
+      } else {
+        setOffline();
+        _liveStatus = false;
+      }
+    })
+    .catch(() => {
+      // Fallback: intentar HEAD al stream directo
+      fetch(BRM_WORKER + '/', { method: 'HEAD', mode: 'cors' })
+        .then(() => { setOnline(null); _liveStatus = true; })
+        .catch(() => { setOffline(); _liveStatus = false; });
+    });
+}
+
+function _updateRSection(d) {
+  // Actualizar la fila de Emisión con estado real
+  const rows = document.querySelectorAll('.info-row');
+  rows.forEach(row => {
+    const label = row.querySelector('.info-label');
+    const val   = row.querySelector('.info-val');
+    if (!label || !val) return;
+    const lText = label.textContent.trim().toUpperCase();
+    if (lText === 'EMISIÓN' || lText === 'EMISION') {
+      val.innerHTML = '<span class="live-dot"></span> ' + (d.live ? 'EN VIVO' : 'OFFLINE');
+    }
+    if (lText === 'BITRATE') {
+      val.textContent = (d.bitrate || 320) + ' kbps · MP3';
+    }
+    if (lText === 'OYENTES') {
+      val.textContent = d.listeners != null ? d.listeners : '---';
+    }
+  });
+}
+
+function fetchNowPlaying() {
+  if (!_liveStatus) return; // Solo cuando hay stream en vivo
+  fetch(BRM_WORKER + '/nowplaying', { cache: 'no-store' })
+    .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+    .then(d => {
+      if (!d.live) return;
+      const song   = d.current && d.current.song   ? d.current.song   : '';
+      const artist = d.current && d.current.artist ? d.current.artist : '';
+      const title  = d.current && d.current.title  ? d.current.title  : song;
+      if (song) {
+        // Solo actualizar si NO está reproduciendo una sesión local
+        if (!audio.dataset.mode || audio.dataset.mode === 'live') {
+          npTitle.textContent  = title || song;
+          npArtist.textContent = artist || 'BUBATRONIK_BRM';
+        }
+      }
+      // Actualizar oyentes también
+      if (d.listeners != null) {
+        document.getElementById('freqListeners').textContent = '\u25CF OYENTES: ' + d.listeners;
+        document.getElementById('listenerCount').textContent = d.listeners;
+      }
+    })
+    .catch(() => {});
+}
+
+// Arrancar polling de nowplaying cada 15s
+if (_npInterval) clearInterval(_npInterval);
+_npInterval = setInterval(fetchNowPlaying, 15000);
+setTimeout(fetchNowPlaying, 3000); // primera llamada a los 3s
+
   checkStatus();
   setInterval(checkStatus, 30000);
   drawViz();
