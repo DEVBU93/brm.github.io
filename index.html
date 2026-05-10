@@ -800,7 +800,7 @@
     <div class="tab-panel" id="tab-sessions">
       <div class="sessions-header reveal">
         <div class="sessions-title">🎛️ ARCHIVO DE SESIONES</div>
-        <div class="badge">3 SESIONES · DRIVE</div>
+        <div class="badge"> SESIONES · DRIVE</div>
       </div>
       <div class="sessions-grid">
         <div class="session-row reveal" onclick="openSession('https://drive.google.com/file/d/1njsgUilfUfXe6odr2hW_vS84wJ8BOwYu')">
@@ -896,7 +896,7 @@
               </div>
               <div class="prog-row reveal">
                 <div><div class="prog-time">∞</div><div class="prog-day">Variable</div></div>
-                <div><div class="prog-name">🎛️ SESIONES NUMERADAS</div><div class="prog-desc">Sesiones largas (4–6h), multigenero, sin pausa. La Sesión 3 marcó el récord con 4.96 GB de música ininterrumpida. Ambiente real de barrio.</div><span class="prog-badge rec">🟢 GRABADO / DRIVE</span></div>
+                <div><div class="prog-name">🎛️ SESIONES NUMERADAS</div><div class="prog-desc">Sesiones largas (4–6h), multigenero, sin pausa. Ambiente real de barrio.</div><span class="prog-badge rec">🟢 GRABADO / DRIVE</span></div>
               </div>
               <div class="prog-row reveal">
                 <div><div class="prog-time">24/7</div><div class="prog-day">Siempre</div></div>
@@ -1523,7 +1523,7 @@
       .then(r => { if (!r.ok) throw new Error(); return r.json(); })
       .then(d => d.status === 'ok' ? setOnline(d.listeners ?? null) : setOffline())
       .catch(() =>
-        fetch('http://uk3freenew.listen2myradio.com:14387', {method:'index', mode:'no-cors', cache:'no-store'})
+          fetch('https://brm.rubenrodriguez-f-93.workers.dev/', {method:'HEAD', mode:'no-cors', cache:'no-store'})
           .then(() => setOnline(null)).catch(() => setOffline())
       );
   }
