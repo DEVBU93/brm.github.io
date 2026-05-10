@@ -1,5 +1,5 @@
 /**
- * BRM STREAM PROXY — Cloudflare Worker v2026.08
+ * BRM STREAM PROXY — Cloudflare Worker v2026.09
  * HTTPS wrapper + Status API para el stream Shoutcast BUBATRONIK_BRM RADIO
  * Frecuencia Sant Salvador · Sant Salvador, Tarragona, Catalunya
  *
@@ -41,10 +41,9 @@ function getCorsHeaders(origin) {
   };
 }
 
-// Fetch con timeout usando AbortController (compatible con Workers runtime)
 async function fetchWithTimeout(url, options, ms) {
   const ctrl = new AbortController();
-  const tid  = setTimeout(() => ctrl.abort(), ms);
+  const tid = setTimeout(() => ctrl.abort(), ms);
   try {
     const res = await fetch(url, { ...options, signal: ctrl.signal });
     clearTimeout(tid);
@@ -55,13 +54,36 @@ async function fetchWithTimeout(url, options, ms) {
   }
 }
 
+// Fix mojibake: UTF-8 bytes decoded as Latin-1 (e.g. â€" → –)
+function fixEncoding(str) {
+  try {
+    const bytes = new Uint8Array(str.split('').map(c => c.charCodeAt(0) & 0xff));
+    return new TextDecoder('utf-8').decode(bytes);
+  } catch(_) {
+    return str;
+  }
+}
+
+// Returns true if the string looks like a bare YouTube video ID
+function isYouTubeId(s) {
+  return /^-?\s*[A-Za-z0-9_-]{6,15}$/.test(s.trim());
+}
+
+// Clean a song string: fix encoding, strip leading dash+space, strip "Current Song" suffix
+function cleanSong(raw) {
+  let s = fixEncoding(raw).trim();
+  if (s.startsWith('- ')) s = s.slice(2).trim();
+  s = s.replace(/\s*Current Song\s*$/i, '').trim();
+  return s;
+}
+
 // SHOUTcast v1 7.html: currentlisteners,streamstatus,peaklisteners,maxlisteners,uniquelisteners,bitrate,songtitle
-// El SHOUTcast puede devolver el CSV envuelto en HTML — hacemos strip antes de parsear
 function parse7html(text) {
   const stripped = text.replace(/<[^>]+>/g, '').trim();
-  const parts    = stripped.split(',');
+  const parts = stripped.split(',');
   if (parts.length < 7) return null;
-  const song = parts.slice(6).join(',').trim();
+  const songRaw = parts.slice(6).join(',').trim();
+  const song = cleanSong(songRaw);
   const streamStatus = parseInt(parts[1], 10);
   let artist = '', title = song;
   const dash = song.indexOf(' - ');
@@ -70,7 +92,7 @@ function parse7html(text) {
     title  = song.substring(dash + 3).trim();
   }
   return {
-    live:             streamStatus === 1,
+    live: streamStatus === 1,
     currentListeners: parseInt(parts[0], 10),
     peakListeners:    parseInt(parts[2], 10),
     maxListeners:     parseInt(parts[3], 10),
@@ -80,28 +102,36 @@ function parse7html(text) {
   };
 }
 
+// Parse the SHOUTcast played.html song history table
 function parsePlayed(html) {
   const rows = [];
-  const trRegex = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
-  let trMatch;
-  while ((trMatch = trRegex.exec(html)) !== null) {
-    const tdRegex = /<td[^>]*>([^<]*)<\/td>/gi;
+  const trRe = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
+  let trM;
+  while ((trM = trRe.exec(html)) !== null) {
+    const inner = trM[1];
     const tds = [];
-    let tdMatch;
-    while ((tdMatch = tdRegex.exec(trMatch[1])) !== null) {
-      tds.push(tdMatch[1].trim());
+    const tdRe = /<td[^>]*>([\s\S]*?)<\/td>/gi;
+    let tdM;
+    while ((tdM = tdRe.exec(inner)) !== null) {
+      const val = tdM[1]
+        .replace(/<[^>]+>/g, '')
+        .replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&nbsp;/g,' ')
+        .trim();
+      tds.push(val);
     }
     if (tds.length >= 2) {
       const time = tds[0];
-      const songFull = tds[1];
-      if (time && songFull && /\d{2}:\d{2}/.test(time)) {
-        let artist = '', title = songFull;
-        const dash = songFull.indexOf(' - ');
+      const rawSong = tds[1];
+      if (time && /\d{1,2}:\d{2}/.test(time) && rawSong) {
+        const songClean = cleanSong(rawSong);
+        if (isYouTubeId(songClean)) continue;
+        let artist = '', title = songClean;
+        const dash = songClean.indexOf(' - ');
         if (dash > -1) {
-          artist = songFull.substring(0, dash).trim();
-          title  = songFull.substring(dash + 3).trim();
+          artist = songClean.substring(0, dash).trim();
+          title  = songClean.substring(dash + 3).trim();
         }
-        rows.push({ time, song: songFull, artist, title });
+        rows.push({ time, song: songClean, artist, title });
       }
     }
   }
@@ -111,13 +141,17 @@ function parsePlayed(html) {
 export default {
   async fetch(request, env, ctx) {
     const origin = request.headers.get('Origin') || '';
-    const url    = new URL(request.url);
-    const hdrs   = { 'User-Agent': 'Mozilla/5.0 (compatible; BRM-Radio/2026)', 'Accept': 'text/plain' };
+    const url = new URL(request.url);
+    const hdrs = {
+      'User-Agent': 'Mozilla/5.0 (compatible; BRM-Radio/2026)',
+      'Accept': 'text/plain,text/html,*/*'
+    };
 
     if (request.method === 'OPTIONS') {
       return new Response(null, { status: 204, headers: getCorsHeaders(origin) });
     }
 
+    // /status
     if (url.pathname === '/status') {
       try {
         const res = await fetchWithTimeout(STREAM_BASE + '/7.html', { headers: hdrs }, 5000);
@@ -142,23 +176,28 @@ export default {
       }
     }
 
+    // /nowplaying
     if (url.pathname === '/nowplaying') {
       try {
         const [r7, rp] = await Promise.allSettled([
           fetchWithTimeout(STREAM_BASE + '/7.html',      { headers: hdrs }, 5000),
           fetchWithTimeout(STREAM_BASE + '/played.html', { headers: hdrs }, 5000),
         ]);
-        const t7   = (r7.status === 'fulfilled' && r7.value.ok) ? await r7.value.text() : '0,0,0,0,0,0,';
-        const html = (rp.status === 'fulfilled' && rp.value.ok) ? await rp.value.text() : '';
+        const t7      = (r7.status === 'fulfilled' && r7.value.ok) ? await r7.value.text() : '0,0,0,0,0,0,';
+        const html    = (rp.status === 'fulfilled' && rp.value.ok) ? await rp.value.text() : '';
         const stat    = parse7html(t7) || { live:false, song:'', artist:'', title:'', currentListeners:0, bitrate:0 };
         const history = parsePlayed(html);
-        const cur     = history[0] || { song:stat.song, artist:stat.artist, title:stat.title };
+        const cur     = history[0] || { song: stat.song, artist: stat.artist, title: stat.title };
         return new Response(JSON.stringify({
           live:      stat.live,
-          current:   { song:cur.song||stat.song, artist:cur.artist||stat.artist, title:cur.title||stat.title },
+          current: {
+            song:   cur.song   || stat.song,
+            artist: cur.artist || stat.artist,
+            title:  cur.title  || stat.title,
+          },
           listeners: stat.currentListeners,
           bitrate:   stat.bitrate,
-          history:   history.slice(0,10),
+          history:   history.slice(0, 10),
           ts:        new Date().toISOString(),
         }), { headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-cache', ...getCorsHeaders(origin) } });
       } catch (err) {
@@ -167,6 +206,7 @@ export default {
       }
     }
 
+    // /health (legacy)
     if (url.pathname === '/health') {
       let listeners = null;
       try {
@@ -177,7 +217,7 @@ export default {
         { headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-cache', ...getCorsHeaders(origin) } });
     }
 
-    // Proxy del stream de audio
+    // Default: proxy del stream de audio
     try {
       const up_h = new Headers();
       up_h.set('User-Agent', 'Mozilla/5.0 BRM-Proxy/2026');
