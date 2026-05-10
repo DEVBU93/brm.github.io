@@ -1146,7 +1146,7 @@
     {n:'105',t:'Richie Hawtin — Contakt (Live)',              artist:'Richie Hawtin',      genre:'techno'},
     {n:'104',t:'Ben Klock — Subzero',                        artist:'Ben Klock',          genre:'techno'},
     {n:'103',t:'Marcel Dettmann — Track 8',                  artist:'Marcel Dettmann',    genre:'techno'},
-    {n:'+ 506',t:'... 506 tracks más en la colección BRM',   artist:'BUBATRONIK COLLECTION · DRIVE → 709 TOTAL',genre:''},
+    {n:'+ 506',t:'... 506 tracks más en la colección BRM',   artist:'BUBATRONIK COLLECTION · DRIVE → 709+ TOTAL',genre:''},
   ];
 
   // ── STREAM URLS (fallback chain) ─────────────────────────────────────
@@ -1535,7 +1535,7 @@
       .then(r => { if (!r.ok) throw new Error(); return r.json(); })
       .then(d => d.status === 'ok' ? setOnline(d.listeners ?? null) : setOffline())
       .catch(() =>
-          fetch('https://brm.rubenrodriguez-f-93.workers.dev/', {method:'HEAD', mode:'no-cors', cache:'no-store'})
+          fetch('https://brm.rubenrodriguez-f-93.workers.dev/', {method:'HEAD', mode:'cors', cache:'no-store'})
           .then(() => setOnline(null)).catch(() => setOffline())
       );
   }
