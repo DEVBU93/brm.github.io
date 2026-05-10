@@ -14,7 +14,7 @@
  */
 
 const STREAM_BASE = 'http://uk3freenew.listen2myradio.com:14387';
-const STREAM_URL  = STREAM_BASE + '/';
+const STREAM_URL  = STREAM_BASE + '/listen.pls';
 const STATION     = 'BUBATRONIK_BRM · Frecuencia Sant Salvador';
 
 const ALLOWED_ORIGINS = [
