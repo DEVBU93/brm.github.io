@@ -187,7 +187,11 @@ export default {
         const html    = (rp.status === 'fulfilled' && rp.value.ok) ? await rp.value.text() : '';
         const stat    = parse7html(t7) || { live:false, song:'', artist:'', title:'', currentListeners:0, bitrate:0 };
         const history = parsePlayed(html);
-        const cur     = history[0] || { song: stat.song, artist: stat.artist, title: stat.title };
+        const _raw = history[0] || { song: stat.song, artist: stat.artist, title: stat.title };         // If song is a YouTube ID, find first real title in history         const _real = history.find(h => !isYouTubeId(h.song));         const cur = (isYouTubeId(_raw.song) && _real) ? _real                   : isYouTubeId(_raw.song) ? { song:'BUBATRONIK_BRM EN VIVO', artist:STATION, title:'Live Mix Open Format' }                   : _raw;
+                const _real = history.find(h => !isYouTubeId(h.song));
+        const cur = (isYouTubeId(_raw.song) && _real) ? _real
+                  : isYouTubeId(_raw.song) ? { song:'BUBATRONIK_BRM EN VIVO', artist:STATION, title:'Live Mix Open Format' }
+                  : _raw;
         return new Response(JSON.stringify({
           live:      stat.live,
           current: {
