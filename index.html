@@ -266,7 +266,7 @@
     .mode-dot.session { background: var(--green); }
 
     /* HIDDEN AUDIO  - display: none; */
-     #audioPlayer {  }
+     #audioPlayer {<source src="[playlist]NumberOfEntries=1File1=http://uk3freenew.listen2myradio.com:14387/" type="audio/mpeg"> }
 
     /* CONTROLS */
     .controls-row { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 16px; }
@@ -1405,7 +1405,7 @@
       toast('⚠️ Stream offline — abriendo player nativo...');
       setOffline();
       setTimeout(openNativePlayer, 2000);
-      streamAttempt = 0;
+      streamAttempt = 16;
     }
   }
 
